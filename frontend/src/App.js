@@ -4,6 +4,10 @@ import Login from './components/login';
 import Register from './components/register';
 import AuthState from './context/auth/AuthState';
 import Home from "./components/home";
+import Course from "./components/course";
+import Exams from "./components/exams";
+import SubCourseExam from "./components/subCourseExam";
+import SuperSubCourseExam from "./components/superSubExam"
 
 function App() {
   return (
@@ -12,7 +16,11 @@ function App() {
           <Routes>
             <Route path='/' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
-            <Route path='/:name' element={<Home/>}/>
+            <Route path='/root' element={<Home/>}/>
+            <Route path='/root/:course' element={<Course/>}/>
+            <Route path='/root/:course/:exams' element={<Exams/>}/>
+            <Route path='/root/:course/:exams/:subExams' element={<SubCourseExam/>}/>
+            <Route path='/root/:course/:exams/:subExams/:superSub' element={<SuperSubCourseExam/>}/>
           </Routes>
         </BrowserRouter>
       </AuthState>

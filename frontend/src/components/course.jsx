@@ -6,10 +6,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Upload from "./upload";
+
 import { useDispatch, useSelector } from 'react-redux';
+import { setReduxFiles, setReduxUploadedFiles, setUpdatePath } from '../redux/storage/storageSlice';
 import AuthContext from '../context/auth/AuthContext';
-import './styles.css'
-import { setUpdatePath } from '../redux/storage/storageSlice';
 
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
@@ -20,31 +20,27 @@ const Home = () => {
     // const [uploadFilesName, setUploadFilesName] = useState("");
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
-    const [rootPath,setRootPath] = useState([]);
-    // const { name } = useParams();
+    const { course } = useParams();
     const Navigate = useNavigate();
 
-    const path =  useSelector(state => state.Files.path);
-    console.log("ppp",path)
-    
-
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
-    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === "root"});
+    console.log("jj",allFoldersName)
+    const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === course});
+    console.log("kk",foldersName)
 
     const allFilesName = useSelector(state => state.Files.allFilesNameStore);
-    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
+    const filesName = allFilesName.filter((eachFolder)=>{return eachFolder.parent == course});
 
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
-    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
+    const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == course});
 
+    const path =  useSelector(state => state.Files.path);
     const getItem = async () => {
         await GetDetails();
     }
     useEffect(()=>{
         getItem();
-        
     },[added])
-    
 
     const [fileInputData , setFileInputData] = useState({topic:"",name:"",year:"",description:""});
 
@@ -71,7 +67,7 @@ const Home = () => {
                 userId : 12345,
                 createdBy : 'ankit',
                 path : newFolderName==='root'?[]:["parent folder path"],
-                parent : "root" ,
+                parent : course ,
                 lastAccessed : null,
                 updatedAt : new Date()
             }
@@ -125,7 +121,7 @@ const Home = () => {
                 year : fileInputData.year,
                 description : fileInputData.description,
                 path : newFolderName === 'root'?[]:["parent folder path"],
-                parent : "root" ,
+                parent : course ,
                 lastAccessed : null,
                 updatedAt : new Date()
             }
@@ -177,7 +173,7 @@ const Home = () => {
                 userId : 12345,
                 createdBy : "ankit",
                 path : newFolderName === 'root'?[]:["parent folder path"],
-                parent : "root" ,
+                parent : course ,
                 lastAccessed : null,
                 // extension :  uploadNewFile.name? uploadNewFile.name.split(".")[1]:".txt",
                 updatedAt : new Date(),
@@ -207,6 +203,7 @@ const Home = () => {
                     setUploadNewFile("");
                 })
             });
+
         }
         
         else
@@ -219,9 +216,6 @@ const Home = () => {
 
     const onChangeHandler = (e) => {
         (setNewFolderName(e.target.value));
-    }
-
-    const submit = async (e)=>{
     }
 
     const pathHandler = (e) => {
@@ -237,23 +231,24 @@ const Home = () => {
         }
         Navigate(`${x}`);
     }
-    
 
+    const submit = async (e)=>{
+    }
   return (
     <div>
-        <div className='w-full h-16 text-end border-b flex items-center justify-end bg-white'>
+        <div className='w-full h-16 text-end border-b flex items-center justify-end'>
             <button onClick={()=>{Navigate('/')}} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Log Out</button>
         </div>
         <div className='flex justify-between items-center py-3 border-b'>
-            <div className='w-40'>
-                {rootPath 
+            <div className='flex mx-6'>
+                {
+                path
                 ?
-                rootPath.map((indPath)=>{<div className='flex mx-4'><Link onClick={pathHandler} className='mx-4'>{indPath}</Link>
-                <div>{`>`}</div></div>}):""
+                path.map((indPath)=>{return <div className='flex items-center mr-1'><button onClick={pathHandler} className='mr-3 cursor-pointer'>{indPath}</button>
+                <div className='mr-3'>{`>`}</div></div>}):""
                 }
                 
             </div>
-            
             <div className='mr-8 flex'>
                 <form onSubmit={handleUpload} className='flex items-center w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-upload px-2"></i>
@@ -363,7 +358,7 @@ const Home = () => {
         <div className='flex flex-col border-b pb-4'>
             <div className='text-center pt-2 pb-3'>All Folders</div>
             <div className="flex mx-8">
-                {foldersName ? foldersName.map((folder) => (
+                {foldersName.length ? foldersName.map((folder) => (
                     <div><Folder key={folder.userId} name={folder.name}/></div>
                 )) 
                 :
@@ -374,7 +369,7 @@ const Home = () => {
         <div className='flex flex-col border-b pb-4'>
             <div className='text-center pt-2 pb-3'>Created Files</div>
             <div className="flex mx-8">
-                {filesName ? filesName.map((file) => (
+                {filesName.length ? filesName.map((file) => (
                     <div><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
                 :
@@ -386,7 +381,7 @@ const Home = () => {
         <div className='flex flex-col border-b pb-4'>
             <div className='text-center pt-2 pb-3'>Uploaded Files</div>
             <div className="flex mx-8">
-                {uploadFilesName ? uploadFilesName.map((upload) => (
+                {uploadFilesName.length ? uploadFilesName.map((upload) => (
                     <div><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
                 )) 
                 :

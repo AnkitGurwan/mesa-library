@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import AuthContext from './AuthContext';
+import fire from '../../config/firebase';
+import { setReduxFiles, setReduxUploadedFiles,setReduxFolders } from '../../redux/storage/storageSlice';
+import { useDispatch } from 'react-redux';
 
 const AuthState = (props) => {
     const [studInfo,setStudInfo] = useState({ name : "" , email : "", roll : ""});
     const url = "http://localhost:5001";
+    const dispatch = useDispatch();
 
     const userLogin = async()=>{
         window.location.href = `${url}/auth/microsoft`;
@@ -38,7 +42,26 @@ const AuthState = (props) => {
         window.location.href = logoutEndpoint;
     }
 
-    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo}}>
+    const GetDetails = async () => {
+        fire.firestore().collection("folders").get().then(async (folders)=>{
+            const folderData = await folders.docs.map((folder)=>folder.data());
+            dispatch(setReduxFolders(folderData));
+           
+        });
+        fire.firestore().collection("files").get().then(async (files)=>{
+            const fileData = await files.docs.map((file)=>file.data());
+            dispatch(setReduxFiles(fileData));
+        })
+        fire.firestore().collection("uploads").get().then(async (files)=>{
+            const uploadData = await files.docs.map((file)=>file.data());
+            dispatch(setReduxUploadedFiles(uploadData));
+        })
+
+        
+        
+    }
+
+    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails}}>
                 {props.children}
             </AuthContext.Provider>)
 }

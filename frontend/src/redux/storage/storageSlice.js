@@ -2,18 +2,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    path : ["root"],
     specificFiles : [],
-    allFiles : [],
+    allFoldersNameStore : [],
+    allFilesNameStore : [],
+    allUploadedFilesNameStore : []
 }
 
 const allprojectsSlice = createSlice({
-    name : "allFiles",
+    name : "Files",
     initialState,
     reducers:{
-        setAllFiles(state,action){
+        setReduxFolders(state,action){
             return {
                 ...state,
-                allFiles : action.payload
+                allFoldersNameStore : action.payload
+              };
+        },    
+        setReduxFiles(state,action){
+            return {
+                ...state,
+                allFilesNameStore : action.payload
+              };
+        },    
+        setReduxUploadedFiles(state,action){
+            return {
+                ...state,
+                allUploadedFilesNameStore : action.payload
               };
         },    
         setSpecificFiles(state,action){
@@ -21,10 +36,29 @@ const allprojectsSlice = createSlice({
                 ...state,
                 specificFiles : action.payload
               };
+        },
+        setPath(state,action){
+            return {
+                ...state,
+                path : [ ...state.path, action.payload]
+            }
+        },
+        setUpdatePath(state,action){
+            let ans = state.path;
+            let final = [];
+            for(let i=0;i<ans.length;i++)
+            {
+                final.push(ans[i]);
+                if(ans[i]===action.payload)break;
+            }
+            return {
+                ...state,
+                path : final
+            }
         }
     }
-})
-export const {setAllFiles , setSpecificFiles} = allprojectsSlice.actions;
+});
+export const {setReduxFiles,setReduxFolders,setReduxUploadedFiles , setSpecificFiles , setPath ,setUpdatePath} = allprojectsSlice.actions;
 
 export default allprojectsSlice.reducer;
 

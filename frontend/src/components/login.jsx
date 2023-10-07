@@ -11,10 +11,6 @@ const Login = () => {
     const [user , setUser] = useState({email:"",password:""});
     const Navigate = useNavigate();
 
-    useEffect(() => { 
-        document.body.style.backgroundColor = 'rgb(220 252 231)' 
-    }, [])
-
     const changeHandler = (e) => {
         setUser({...user,[e.target.name] : e.target.value})
     }
@@ -54,7 +50,7 @@ const Login = () => {
     }
 
     return (
-        <div className='h-screeen w-full flex '> 
+        <div className='h-screeen w-full flex' style={{"backgroundColor":"rgb(220 252 231)"}}> 
             <div className="header absolute w-full text-3xl container mx-auto text-right p-10 px-32 tracking-wider font-bold text-blue-900 mt-20">
                 Welcome to MESA Library!
             </div>
