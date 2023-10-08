@@ -383,7 +383,7 @@ const Home = () => {
                                 
         </div>
 
-        <div className='flex flex-col border-b pb-4'>
+        <div className='flex flex-col'>
             <div className='text-center pt-2 pb-3'>Uploaded Files</div>
             <div className="flex mx-8">
                 {uploadFilesName ? uploadFilesName.map((upload) => (
