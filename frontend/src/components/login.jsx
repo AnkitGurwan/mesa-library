@@ -9,6 +9,7 @@ import logo from './images/mesa-logo.png';
 const Login = () => {
     const {userLogin} = useContext(AuthContext);
     const [user , setUser] = useState({email:"",password:""});
+    const [loading,setLoading] = useState(false);
     const Navigate = useNavigate();
 
     const changeHandler = (e) => {
@@ -20,6 +21,7 @@ const Login = () => {
     }
 
     const submitHandler = (e) => {
+        setLoading(true);
         e.preventDefault();
         if(user.email && user.password)
         {
@@ -27,9 +29,14 @@ const Login = () => {
             .auth()
             .signInWithEmailAndPassword(user.email,user.password)
             .then((user)=>{
-                Navigate('/root')
+                setLoading(false);
+                toast.success("Logged In Successfully", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                Navigate('/root');
             })
             .catch((error)=>{
+                setLoading(false);
                 if(error.code === "auth/invalid-login-credentials")
                     toast.error("Invalid Password", {
                         position: toast.POSITION.BOTTOM_RIGHT
@@ -50,18 +57,21 @@ const Login = () => {
     }
 
     return (
-        <div className='h-screeen w-full flex' style={{"backgroundColor":"rgb(220 252 231)"}}> 
-            <div className="header absolute w-full text-3xl container mx-auto text-right p-10 px-32 tracking-wider font-bold text-blue-900 mt-20">
-                Welcome to MESA Library!
-            </div>
+        <div className='h-full w-full flex overflow-y-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
 
-            <div className='flex justify-center items-center flex-col '>
-                <img className='h-1/2' src='https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg'/>  
-                <img src= {logo} alt="logo" className="h-1/6 w-1/3" />
+            <div className='w-1/2 h-full flex justify-center items-center flex-col '>
+                <img className='h-full' src='https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg'/>  
+                
                
             </div>
             
-            <div className='h-full w-1/2 flex justify-center items-center mt-48 '>
+            <div className='h-full w-1/2 flex justify-center items-center flex-col'>
+            <div className='flex items-center'>
+                <img src= {logo} alt="logo" className="h-20 w-36 object-fit" />
+                <div className="header text-2xl container text-right tracking-wider font-bold text-blue-900">
+                    Welcome to MESA Library!
+                </div>
+            </div>
             <form onSubmit={submitHandler}>
                 <div class="relative mb-4 "  data-te-input-wrapper-init>
                     <input
@@ -95,11 +105,11 @@ const Login = () => {
                     >New User?</Link>
                 </div>
 
-                <button
+                {loading?<div className='w-full px-7 h-12 rounded-md text-lg font-bold flex justify-center items-center bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]'>Loading...</div>:<button
                     type="submit"
-                    class="px-7 w-full py-3 rounded-md text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] bg-blue-700 hover:bg-blue-800">
+                    class="px-7 w-full h-12 rounded-md text-md font-bold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] bg-blue-700 hover:bg-blue-800">
                     Sign in
-                </button>
+                </button>}
 
                 <div
                     class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-black after:mt-0.5 after:flex-1 after:border-t after:border-black">
