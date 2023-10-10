@@ -12,10 +12,9 @@ const Folder = (props) => {
   }
   return (
     
-    <Link to={`${props.name}`} onClick={clickHandler} className='py-3 mx-2 rounded-xl overflow-y-hidden w-24 h-24 flex justify-between items-center cursor-pointer hover:bg-gray-100 flex-col'>
-        <img src={folder} alt="folder" className='' />
-        {/* <i class="fa-regular fa-folder px-2 text-2xl font-light"></i> */}
-        <div className='text-xs px-1 pt- capitalize'>{props.name}</div>
+    <Link to={`${props.name}`} onClick={clickHandler} className='py-3 mx-4 border overflow-y-hidden w-20 h-20 flex justify-between items-center cursor-pointer hover:bg-gray-100 flex-col'>
+        <i class="fa-regular fa-folder px-2 text-xl font-light"></i>
+        <div className='text-xs px-1 pt-2 capitalize'>{props.name}</div>
     </Link>
   )
 }
