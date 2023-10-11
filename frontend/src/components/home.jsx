@@ -217,6 +217,8 @@ const Home = () => {
         }
     }
 
+   
+
     const onChangeHandler = (e) => {
         (setNewFolderName(e.target.value));
     }
@@ -236,6 +238,21 @@ const Home = () => {
             
         }
         Navigate(`${x}`);
+    }
+
+    const handleClick = (f)=> {
+        // const DeleteFolderRef = fire.storage().ref(`folders/12345/${name}`);
+        // DeleteFolderRef.delete().then(()=>{console.log('deleted')}).catch((error)=>{console.log(error)})
+        // fire.deleteObj(foldersName.filter((folder)=>{
+        //     return name == folder.name
+        // }))
+
+        // foldersName = foldersName.filter((f)=>{
+        //     return folder.name != name;
+        // }) 
+
+        fire.firestore().collection("folders").doc(`${f.name}`).delete().then(()=>{console.log('deleted')}).catch((error)=>{console.log(error)})
+        // get().then((querySnapshot)=>{querySnapshot.forEach((doc)=>{console.log(doc.data())})}))
     }
     
 
@@ -364,7 +381,11 @@ const Home = () => {
             <div className='text-center pt-2 pb-3'>All Folders</div>
             <div className="flex mx-8">
                 {foldersName ? foldersName.map((folder) => (
-                    <div><Folder key={folder.userId} name={folder.name}/></div>
+                    
+                    <div>
+                        <Folder key={folder.userId} name={folder.name} />
+                        <button className="delete" onClick = {()=>handleClick(folder)}>x</button>
+                    </div>
                 )) 
                 :
                  ""}
