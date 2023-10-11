@@ -5,6 +5,7 @@ import fire from '../config/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import logo from './images/mesa-logo.png';
+import { Spinner } from "@material-tailwind/react";
 
 const Login = () => {
     const {userLogin} = useContext(AuthContext);
@@ -105,7 +106,18 @@ const Login = () => {
                     >New User?</Link>
                 </div>
 
-                {loading?<div className='w-full px-7 h-12 rounded-md text-lg font-bold flex justify-center items-center bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]'>Loading...</div>:<button
+                {loading 
+                ?
+                <div>
+                    
+                    <div className='w-full px-3 h-12 rounded-md text-lg font-bold flex justify-center items-center bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]'>
+                        <div className='pr-2'><Spinner/></div>
+                        <div>Loading...</div>
+                    </div>
+                </div>
+                
+                :
+                <button
                     type="submit"
                     class="px-7 w-full h-12 rounded-md text-md font-bold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] bg-blue-700 hover:bg-blue-800">
                     Sign in

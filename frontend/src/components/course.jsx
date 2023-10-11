@@ -359,7 +359,7 @@ const Home = () => {
             <div className='text-center pt-2 pb-3'>All Folders</div>
             <div className="flex mx-8">
                 {foldersName.length ? foldersName.map((folder) => (
-                    <div><Folder key={folder.userId} name={folder.name}/></div>
+                    <div><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
                 :
                  ""}

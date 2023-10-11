@@ -2,26 +2,26 @@ import React,{useContext,useEffect,useState} from 'react';
 import Folder from './folder'
 import File from './file'
 import fire from '../config/firebase';
-import { toast, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Upload from "./upload";
 import { useDispatch, useSelector } from 'react-redux';
 import AuthContext from '../context/auth/AuthContext';
 import './styles.css'
 import { setUpdatePath } from '../redux/storage/storageSlice';
+import { Spinner } from '@material-tailwind/react';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
     const [newFolderName, setNewFolderName] = useState("");
     const dispatch = useDispatch();
-    // const [foldersName, setFoldersName] = useState("");
-    // const [filesName, setFilesName] = useState("");
-    // const [uploadFilesName, setUploadFilesName] = useState("");
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
     const [rootPath,setRootPath] = useState([]);
-    // const { name } = useParams();
+    const [newFolderAdd,setNewFolderAdd]  = useState(false);
+    const [newFileAdd,setNewFileAdd]  = useState(false);
+    const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const Navigate = useNavigate();
 
     const path =  useSelector(state => state.Files.path);
@@ -54,6 +54,7 @@ const Home = () => {
   }
 
     const addFolderHandler = (e) => {
+        setNewFolderAdd(true);
         e.preventDefault();
         var flag = true;
         
@@ -82,6 +83,7 @@ const Home = () => {
             .add(data)
             .then((folder)=>{
                 setAdded(!added);
+                setNewFolderAdd(false);
                 setNewFolderName("");
                 if(document.getElementById("myModal"))
                     document.getElementById("myModal").style.display="none"
@@ -93,12 +95,14 @@ const Home = () => {
         }
         else if( flag )
         {
+            setNewFolderAdd(false);
             toast.error("Folder Name must have atleast 4 characters.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
         else
         {
+            setNewFolderAdd(false);
             toast.error("Folder Name Already Exist.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
@@ -106,6 +110,7 @@ const Home = () => {
     }
 
     const addFileHandler = (e) => {
+        setNewFileAdd(true);
         e.preventDefault();
         var flag = true;
         
@@ -136,6 +141,7 @@ const Home = () => {
             .add(data)
             .then((file)=>{
                 setAdded(!added);
+                setNewFileAdd(false);
                 setFileInputData({name:"",topic:"",year:"",description:""});
                 if(document.getElementById("myModal2"))
                     document.getElementById("myModal2").style.display="none"
@@ -147,12 +153,14 @@ const Home = () => {
         }
         else if( flag )
         {
+            setNewFileAdd(false);
             toast.error("Folder Name must have atleast 4 characters.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
         else
         {
+            setNewFileAdd(false);
             toast.error("Folder Name Already Exist.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
@@ -160,7 +168,9 @@ const Home = () => {
     }
 
     const handleUpload = (e) => {
+        setNewUploadFileAdd(true);
         e.preventDefault();
+
         var flag = true;
         
         uploadFilesName.map((file) => {
@@ -205,13 +215,19 @@ const Home = () => {
                 .add(data)
                 .then((file)=>{
                     setAdded(!added);
+                    setNewUploadFileAdd(false);
                     setUploadNewFile("");
+                    setNewFolderName("");
+                    toast.success("File Uploaded Successfully", {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
                 })
             });
         }
         
         else
         {
+            setNewUploadFileAdd(false);
             toast.error("File already uploaded.", {
                 position: toast.POSITION.BOTTOM_RIGHT
             });
@@ -247,10 +263,12 @@ const Home = () => {
         </div>
         <div className='flex justify-between items-center py-3 border-b'>
             <div className='w-40'>
-                {rootPath 
+                {rootPath.length 
                 ?
                 rootPath.map((indPath)=>{<div className='flex mx-4'><Link onClick={pathHandler} className='mx-4'>{indPath}</Link>
-                <div>{`>`}</div></div>}):""
+                <div>{`>`}</div></div>})
+                :
+                <div className='mx-6 cursor-pointer'>root</div>
                 }
                 
             </div>
@@ -259,7 +277,18 @@ const Home = () => {
                 <form onSubmit={handleUpload} className='flex items-center w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-upload px-2"></i>
                     <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/>
-                    {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
+                    {
+                    uploadNewFile
+                    ?
+                    newUploadFileAdd
+                    ?
+                    <div className='py-1 px-4 my-1'>
+                        <Spinner/>
+                    </div>
+                    :
+                    <button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>
+                    :
+                    ""}
                 </form>
                 <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-file px-2"></i>
@@ -291,9 +320,16 @@ const Home = () => {
                     </div>
                     
                     <div class="flex items-center justify-center">
+                      {newFolderAdd
+                      ?
+                      <div className='py-1 px-4 my-1'>
+                        <Spinner/>
+                      </div>
+                      :
                       <button id='myButton' onClick={addFolderHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-100" type="submit">
                         Add Folder
                       </button>
+                        }
 
                     </div>
                   </form>
@@ -312,11 +348,12 @@ const Home = () => {
                                 onChange={onChangeHandler2}
                                 value={fileInputData.name}
                                 required
+                                autoFocus
                                 autoComplete='off'
                             />
                             <input
                                 class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline ml-2"
-                                type="text"
+                                type="number"
                                 placeholder="Year Of Studying"
                                 name="year"
                                 onChange={onChangeHandler2}
@@ -329,7 +366,7 @@ const Home = () => {
                             <input
                                 class="appearance-none border text-sm rounded w-full mb-2 py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                 type="text"
-                                placeholder="Heading"
+                                placeholder="Heading (course code)"
                                 name="topic"
                                 onChange={onChangeHandler2}
                                 value={fileInputData.topic}
@@ -351,9 +388,16 @@ const Home = () => {
                         </div>
                         
                         <div class="flex items-center justify-center">
+                        {newFileAdd
+                        ?
+                        <div className='py-1 px-4 my-1'>
+                            <Spinner/>
+                        </div>
+                        :
                         <button id='myButton' onClick={addFileHandler} class="bg-blue-600 hover:bg-blue-700 text-lg text-white font-medium my-1 py-1 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
                             Create File
                         </button>
+                        }
 
                         </div>
                     </form>
@@ -365,7 +409,7 @@ const Home = () => {
             <div className='text-center pt-2 pb-3'>All Folders</div>
             <div className="flex mx-8 flex-wrap">
                 {foldersName ? foldersName.map((folder) => (
-                    <div><Folder key={folder.userId} name={folder.name}/></div>
+                    <div><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
                 :
                  ""}
@@ -376,7 +420,7 @@ const Home = () => {
             <div className='text-center pt-2 pb-3'>Created Files</div>
             <div className="flex mx-8">
                 {filesName ? filesName.map((file) => (
-                    <div><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                    <div><File key={file.userId} parent={file.parent} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
                 :
                  ""}
@@ -388,7 +432,7 @@ const Home = () => {
             <div className='text-center pt-2 pb-3'>Uploaded Files</div>
             <div className="flex mx-8">
                 {uploadFilesName ? uploadFilesName.map((upload) => (
-                    <div><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
+                    <div><Upload key={upload.userId} parent={upload.parent} name={upload.name} url={upload.url}/></div>
                 )) 
                 :
                  ""}
