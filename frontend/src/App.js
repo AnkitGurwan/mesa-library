@@ -7,7 +7,8 @@ import Home from "./components/home";
 import Course from "./components/course";
 import Exams from "./components/exams";
 import SubCourseExam from "./components/subCourseExam";
-import SuperSubCourseExam from "./components/superSubExam"
+import SuperSubCourseExam from "./components/superSubExam";
+import StudentLogin from "./components/main";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
             <Route path='/root/:course/:exams' element={<Exams/>}/>
             <Route path='/root/:course/:exams/:subExams' element={<SubCourseExam/>}/>
             <Route path='/root/:course/:exams/:subExams/:superSub' element={<SuperSubCourseExam/>}/>
+
+            <Route path="/main" element={<StudentLogin/>}></Route>
           </Routes>
         </BrowserRouter>
       </AuthState>

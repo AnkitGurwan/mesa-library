@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 const AuthState = (props) => {
     const [studInfo,setStudInfo] = useState({ name : "" , email : "", roll : ""});
-    const url = "http://localhost:5001";
+    const url = "http://localhost:5000";
     const dispatch = useDispatch();
 
     const userLogin = async()=>{
@@ -22,7 +22,6 @@ const AuthState = (props) => {
                 'Code': code
             }
         });
-        console.log("222")
 
         const json=await response.json();
         console.log(json.studInformation)
@@ -34,11 +33,11 @@ const AuthState = (props) => {
         setStudInfo({...studInfo, name : json.studInformation.givenName , roll : json.studInformation.surname , email : json.studInformation.mail});
     }
 
-    const logOut=async()=>{
-        console.log( process.env.REACT_APP_MICROSOFT_GRAPH_TENANT_ID)
+    const logOut  = async () => {
         
         const tenantID = process.env.REACT_APP_MICROSOFT_GRAPH_TENANT_ID;
         const logoutEndpoint = `https://login.microsoftonline.com/${tenantID}/oauth2/v2.0/logout?post_logout_redirect_uri=${process.env.REACT_APP_FRONTEND_URL}`;
+        alert(logoutEndpoint)
         window.location.href = logoutEndpoint;
     }
 

@@ -4,6 +4,8 @@ import cors from 'cors';
 import dotenv from "dotenv";
 dotenv.config({path:"config/.env"});
 
+const app = express();
+
 const corsOptions = {
     origin : `${process.env.FRONTENDURL}`,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
@@ -13,10 +15,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions)); 
 
-const app = express();
-
 app.use(express.json());
 
+
+import authRouter from "./Views/msAuth.js"
 app.use(authRouter);
 
 app.listen(process.env.PORT,(req,res,err)=>{

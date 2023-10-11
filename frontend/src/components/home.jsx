@@ -40,6 +40,7 @@ const Home = () => {
     const getItem = async () => {
         await GetDetails();
     }
+    
     useEffect(()=>{
         getItem();
         
@@ -379,7 +380,7 @@ const Home = () => {
         </div>
         <div className='flex flex-col border-b pb-4'>
             <div className='text-center pt-2 pb-3'>All Folders</div>
-            <div className="flex mx-8">
+            <div className="flex mx-8 flex-wrap">
                 {foldersName ? foldersName.map((folder) => (
                     
                     <div>

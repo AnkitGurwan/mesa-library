@@ -7,6 +7,7 @@ import logo from './images/mesa-logo.png';
 
 const Login = () => {
     const [user , setUser] = useState({email:"",password:"",confirmPassword:""});
+    const [loading,setLoading] = useState(false);
     const Navigate = useNavigate();
     
     const changeHandler = (e) => {
@@ -19,9 +20,12 @@ const Login = () => {
     }
 
     const submitHandler = (e) => {
+        setLoading(true);
         e.preventDefault();
         if(user.password != user.confirmPassword)
         {
+            alert(user.password);
+            alert(useEffect.confirmPassword)
             toast.error("Password does not match", {
                 position: toast.POSITION.BOTTOM_RIGHT
               });
@@ -38,6 +42,7 @@ const Login = () => {
                 .updateProfile({
                 displayName: user.email
                 }).then(() => {
+                    setLoading(false);
                     const currentUser = fire.auth().currentUser;
                     toast.success("Registered Successfully", {
                         position: toast.POSITION.BOTTOM_RIGHT
@@ -45,15 +50,15 @@ const Login = () => {
                     Navigate('/root');
                 })
                 .catch((err)=>{
+                    setLoading(false);
                     toast.error("Please try again.", {
                         position: toast.POSITION.BOTTOM_RIGHT
                     });
                 })
             })
             .catch((err) => {
-                console.log("err",err.code)
+                setLoading(false);
                 if(err.code === "auth/email-already-in-use"){
-                    console.log("1")
                     toast.error("Email already in use", {
                         position: toast.POSITION.BOTTOM_RIGHT
                     });
@@ -72,18 +77,22 @@ const Login = () => {
         }
     }
     return (
-        <div className='w-full flex' style={{"backgroundColor":"rgb(220 252 231)"}}> 
-            <div className="header absolute w-full text-3xl container mx-auto text-right p-10 px-32 tracking-wider font-bold text-blue-900 mt-20">
-                Welcome to MESA Library!
-            </div>
+        <div className='w-full h-full flex' style={{"backgroundColor":"rgb(220 252 231)"}}> 
+           
 
-            <div className='flex justify-center items-center flex-col '>
-                <img className='h-1/2' src='https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg'/>  
-                <img src= {logo} alt="logo" className="h-1/6 w-1/3" />
+           <div className='w-1/2 h-full flex justify-center items-center flex-col '>
+                <img className='h-full' src='https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg'/>  
+                
                
             </div>
             
-            <div className='h-full w-1/2 flex justify-center items-center mt-48'>
+            <div className='h-full w-1/2 flex justify-center items-center flex-col'>
+            <div className='flex items-center'>
+                <img src= {logo} alt="logo" className="h-20 w-36 object-fit" />
+                <div className="header text-2xl container text-right tracking-wider font-bold text-blue-900">
+                    Welcome to MESA Library!
+                </div>
+            </div>
             <form onSubmit={submitHandler}>
                 <div class="relative mb-4"  data-te-input-wrapper-init>
                     <input
@@ -113,8 +122,8 @@ const Login = () => {
                     <input
                     type="password"
                     class="border outline-0  py-2 px-3 w-72 rounded-xl focus:outline-4 focus:outline-blue-300"
-                    name='condirmPassword'
-                    value={user.confirmPasswordpassword}
+                    name='confirmPassword'
+                    value={user.confirmPassword}
                     placeholder="Confirm Password"
                     required
                     onChange={changeHandler} />
@@ -129,11 +138,15 @@ const Login = () => {
                     >Already a User?</Link>
                 </div>
 
+                {loading?
+                <div className='w-full px-7 h-12 rounded-md text-lg font-bold flex justify-center items-center bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]'>Loading...</div>
+                :
                 <button
                     type="submit"
-                    class="px-7 w-full py-3 rounded-md text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] bg-blue-700 hover:bg-blue-800">
+                    class="px-7 w-full h-12 rounded-md text-lg font-bold font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] bg-blue-700 hover:bg-blue-800">
                     Register
                 </button>
+                }
 
                 
           
