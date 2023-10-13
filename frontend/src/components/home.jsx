@@ -1,9 +1,9 @@
 import React,{useContext,useEffect,useState} from 'react';
-import Folder from './folder'
-import File from './file'
+import Folder from './admin/folder'
+import File from './admin/file'
 import fire from '../config/firebase';
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Upload from "./upload";
+import Upload from "./admin/upload";
 import { useDispatch, useSelector } from 'react-redux';
 import AuthContext from '../context/auth/AuthContext';
 import './styles.css'
