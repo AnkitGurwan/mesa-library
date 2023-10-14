@@ -17,9 +17,9 @@ const File = (props) => {
   
 
   return (
-    <div className='border hover:bg-gray-200 rounded-lg relative mx-2'>
-    <div onClick={()=>{!flag?setFlag(true):setFlagg(false)}} className='py-4 mx-4 w-10 h-20 flex flex-col justify-center items-center cursor-pointer'>
-        <div className='text-xs px-1 pt-2 capitalize text-center'>{props.name?props.name.slice(0,15):""}</div>
+    <div className='hover:scale-105 relative mr-4 bg-[url("https://cdn3.vectorstock.com/i/1000x1000/49/32/user-guide-book-vector-25754932.jpg")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
+      <div onClick={()=>{!flag?setFlag(true):setFlagg(false)}} className='w-24 h-28 flex justify-center items-end  cursor-pointer'>
+        <div className='text-xs w-full py-1 bg-white capitalize text-center font-medium text-black'>{props.name?props.name.slice(0,15):""}</div>
 
           {flag?<div id="myModal5" class="modal5 cursor-auto ">
                 <div class= "modal-content5 flex justify-end">

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     path : ["root"],
+    userPath : ["main"],
     specificFiles : [],
     allFoldersNameStore : [],
     allFilesNameStore : [],
@@ -43,6 +44,12 @@ const allprojectsSlice = createSlice({
                 path : [ ...state.path, action.payload]
             }
         },
+        setUserPath(state,action){
+            return {
+                ...state,
+                userPath : [ ...state.userPath, action.payload]
+            }
+        },
         setUpdatePath(state,action){
             let ans = state.path;
             let final = [];
@@ -55,10 +62,23 @@ const allprojectsSlice = createSlice({
                 ...state,
                 path : final
             }
+        },
+        setUserUpdatePath(state,action){
+            let ans = state.userPath;
+            let final = [];
+            for(let i=0;i<ans.length;i++)
+            {
+                final.push(ans[i]);
+                if(ans[i] === action.payload)break;
+            }
+            return {
+                ...state,
+                userPath : final
+            }
         }
     }
 });
-export const {setReduxFiles,setReduxFolders,setReduxUploadedFiles , setSpecificFiles , setPath ,setUpdatePath} = allprojectsSlice.actions;
+export const {setReduxFiles,setReduxFolders,setReduxUploadedFiles , setSpecificFiles , setPath ,setUpdatePath , setUserPath , setUserUpdatePath} = allprojectsSlice.actions;
 
 export default allprojectsSlice.reducer;
 

@@ -17,9 +17,9 @@ const Folder = (props) => {
   }
 
   return (
-    <div className='mx-5 my-3 relative text-white font-semibold bg-[url("https://www.bolton.ac.uk//assets/Uploads/shutterstock-1213477993-3.jpg")] bg-fit' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center" }}>
-      <Link to={`${props.name}`} onClick={clickHandler} className='w-28 h-32 flex justify-center items-end cursor-pointer backdrop-brightness-50'>
-        <div className='text-xs w-full text-center py-1 capitalize bg-white text-gray-800'>{props.name}</div>
+    <div className='hover:scale-105 w-60 border-gray-400 relative text-white font-semibold bg-[url("https://www.clearias.com/up/UPSC-Studymaterials-of-ClearIAS.png")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
+      <Link to={`${props.name}`} onClick={clickHandler} className='w-60 h-40 flex justify-end items-start cursor-pointer backdrop-brightness-75'>
+        <div className='text-xs mr-1 mt-1 p-1 text-center capitalize bg-white text-gray-800'>{props.name}</div>
       </Link>
     </div>
   )

@@ -49,7 +49,9 @@ const HomePage = () => {
                         <div className='text-3xl font-bold p-1'>Welcome Ankit Gurwan 👋</div>
                         <div className='text-xl font-semibold pt-1'>Mechanical Engineer 👨‍🔧</div>
                     </div>
-                    <a className='mx-auto flex justify-center items-center w-28 mt-8 border p-2 rounded-lg hover:bg-gray-100 hover:text-black cursor-pointer' href="#material">
+                    <a 
+                    href="#material"
+                    className='mx-auto flex justify-center items-center w-28 mt-8 border p-2 rounded-lg hover:bg-gray-100 hover:text-black cursor-pointer scroll-smooth'>
                         <div className='mr-2'>Let's Start</div>
                         <BsChevronRight />
                     </a>
@@ -57,11 +59,13 @@ const HomePage = () => {
 
                 {/* material */}
                 <div id='material' className='w-full px-4 pt-2 pb-5' style={{"backgroundColor":"#93B1A6"}}>
-                    <div className='flex flex-col pb-2' >
-                        <div className='pl-12 text-start text-2xl text-white font-bold py-6'>ALL SEMESTERS</div>
-                        <div className="flex mx-8 py-2 flex-wrap">
+                    <div className='flex flex-col my-4 mx-32' >
+                        <div className='pl-8 text-start text-3xl text-white font-bold pt-2 pb-8'>ALL SEMESTERS</div>
+                        <div className="grid grid-cols-3 gap-8 mx-8 py-2">
                             {foldersName ? foldersName.map((folder) => (
-                                <div><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                                <div>
+                                    <Folder key={folder.userId} parent={folder.parent} name={folder.name}/>
+                                </div>
                             )) 
                             :
                             ""}
@@ -74,9 +78,9 @@ const HomePage = () => {
 
                 {/* guides */}
                 <div id='guides' className='w-full p-4' style={{"backgroundColor":"#183D3D"}}>
-                    <div className='flex flex-col border-b pb-4'>
-                        <div className='pl-12 text-start text-2xl text-white font-bold py-6'>Created Files</div>
-                        <div className="flex mx-8">
+                    <div className='flex flex-col pb-4 mx-32'>
+                        <div className='pl-8 text-start text-2xl text-white font-bold py-6'>SEMESTER GUIDES</div>
+                        <div className="flex mx-8 py-2 flex-wrap">
                             {filesName ? filesName.map((file) => (
                                 <div><File key={file.userId} parent={file.parent} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                             )) 
