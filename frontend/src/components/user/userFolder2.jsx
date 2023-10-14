@@ -12,8 +12,8 @@ const Folder = (props) => {
   }
 
   return (
-    <div className='hover:scale-105 w-60 border-gray-400 relative text-white font-semibold bg-[url("https://www.clearias.com/up/UPSC-Studymaterials-of-ClearIAS.png")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
-      <Link to={`${props.name}`} onClick={clickHandler} className='w-60 h-40 flex justify-end items-start cursor-pointer backdrop-brightness-75'>
+    <div className='hover:scale-105 w-36 mx-4 border-gray-400 relative text-white font-semibold bg-[url("https://thumbs.dreamstime.com/b/lot-books-lying-table-colored-retro-style-vector-image-236287545.jpg")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
+      <Link to={`${props.name}`} onClick={clickHandler} className='w-36 h-28 flex justify-end items-start cursor-pointer backdrop-brightness-75'>
         <div className='text-xs mr-1 mt-1 p-1 text-center capitalize bg-white text-gray-800'>{props.name}</div>
       </Link>
     </div>

@@ -11,6 +11,8 @@ import SuperSubCourseExam from "./components/superSubExam";
 import UsersLogin from "./components/main";
 import UsersCourses from "./components/user/userCourse";
 import UserExams from "./components/user/userExams";
+import UserSubCourseExams from "./components/user/userSubCourseExam";
+import UserSuperSubExams from "./components/user/userSuperSubExam";
 
 function App() {
   return (
@@ -28,8 +30,8 @@ function App() {
             <Route path="/main" element={<UsersLogin/>}></Route>
             <Route path="/main/:course" element={<UsersCourses/>}></Route>
             <Route path="/main/:course/:exams" element={<UserExams/>}></Route>
-            <Route path="/main/:course/:exams/:subexams" element={<UserExams/>}></Route>
-            <Route path="/main/:course/:exams/:subexams/:supersub" element={<UserExams/>}></Route>
+            <Route path="/main/:course/:exams/:subExams" element={<UserSubCourseExams/>}></Route>
+            <Route path="/main/:course/:exams/:subExams/:superSub" element={<UserSuperSubExams/>}></Route>
           </Routes>
         </BrowserRouter>
       </AuthState>

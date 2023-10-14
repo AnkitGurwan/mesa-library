@@ -11,7 +11,7 @@ const File = (props) => {
   
 
   return (
-    <div className='hover:scale-105 relative mr-4 bg-[url("https://cdn3.vectorstock.com/i/1000x1000/49/32/user-guide-book-vector-25754932.jpg")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
+    <div className='hover:scale-105 border border-gray-400 relative mr-4 bg-[url("https://cdn3.vectorstock.com/i/1000x1000/49/32/user-guide-book-vector-25754932.jpg")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
       <div onClick={()=>{!flag?setFlag(true):setFlagg(false)}} className='w-24 h-28 flex justify-center items-end  cursor-pointer backdrop-brightness-75'>
         <div className='text-xs w-full py-1 bg-white capitalize text-center font-medium text-black '>{props.name?props.name.slice(0,15):""}</div>
 

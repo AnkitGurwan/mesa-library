@@ -1,11 +1,11 @@
 import React,{useContext,useEffect,useState} from 'react';
-import Folder from './userFolder'
-import File from './userFile'
+import Folder from './userFolder2'
+import File from './userFile2'
 import fire from '../../config/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Upload from "./userUpload";
+import Upload from "./userUpload2";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
@@ -66,9 +66,9 @@ const Home = () => {
                 }
             </div>
         </div>
-        <div className='flex flex-col border-b pb-4'>
-            <div className='text-center pt-2 pb-3'>All Folders</div>
-            <div className="flex mx-8">
+        <div className='flex flex-col border-b pb-6'>
+            <div className='text-start pt-4 pl-12 font-semibold text-xl'>All Courses</div>
+            <div className="grid grid-cols-6 gap-4 mx-8 my-8">
                 {foldersName.length ? foldersName.map((folder) => (
                     <div><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
@@ -77,6 +77,7 @@ const Home = () => {
             </div>
                                 
         </div>
+        {filesName.length?
         <div className='flex flex-col border-b pb-4'>
             <div className='text-center pt-2 pb-3'>Created Files</div>
             <div className="flex mx-8">
@@ -88,7 +89,10 @@ const Home = () => {
             </div>
                                 
         </div>
+        :
+        ""}
 
+        {uploadFilesName.length?
         <div className='flex flex-col border-b pb-4'>
             <div className='text-center pt-2 pb-3'>Uploaded Files</div>
             <div className="flex mx-8">
@@ -100,6 +104,8 @@ const Home = () => {
             </div>
                                 
         </div>
+        :
+        ""}
 
         
 
