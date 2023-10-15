@@ -26,7 +26,7 @@ const File = (props) => {
   }
   
   return (
-    <div className='border hover:bg-gray-200 rounded-lg relative mx-2'
+    <div className='border hover:bg-gray-200 rounded-sm p-1 border-gray-400 relative mx-2'
     onMouseEnter={()=>{setShowDelete(true)}}
     onMouseLeave={()=>setShowDelete(false)}>
       {showDelete

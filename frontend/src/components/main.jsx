@@ -53,7 +53,7 @@ const HomePage = () => {
                         <div className='text-4xl font-bold p-2'>Welcome Ankit Gurwan 👋</div>
                         <div className='text-2xl font-semibold pt-2'>Mechanical Engineer 👨‍🔧</div>
                     </div>
-                    <a className='scroll mx-auto flex justify-center items-center w-28 mt-8 border p-2 rounded-lg hover:bg-gray-100 hover:text-black cursor-pointer' href="#material">
+                    <a href="#material" className='scroll mx-auto flex justify-center items-center w-28 mt-8 border p-2 rounded-lg hover:bg-gray-100 hover:text-black cursor-pointer'>
                         <div className='mr-2'>Let's Start</div>
                         <BsChevronRight />
                     </a>

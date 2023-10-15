@@ -1,19 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { setPath } from '../../redux/storage/storageSlice';
-import folder from '../images/folder.png';
-import fire from '../../config/firebase';
-import AuthContext from '../../context/auth/AuthContext';
-import { toast, ToastContainer } from 'react-toastify';
+import { setUserPath } from '../../redux/storage/storageSlice';
 import "react-toastify/dist/ReactToastify.css";
 
 const Folder = (props) => {
     const dispatch = useDispatch();
-  const { GetDetails } = useContext(AuthContext);
   
   const clickHandler = () => {
-    dispatch(setPath(props.name));
+    dispatch(setUserPath(props.name));
   }
 
   return (
