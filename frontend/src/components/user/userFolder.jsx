@@ -17,11 +17,11 @@ const Folder = (props) => {
   }
 
   return (
-    <div className='mx-5 my-3 relative text-white font-semibold bg-[url("https://www.bolton.ac.uk//assets/Uploads/shutterstock-1213477993-3.jpg")] bg-fit' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center" }}>
-      <Link to={`${props.name}`} onClick={clickHandler} className='w-28 h-32 flex justify-center items-end cursor-pointer backdrop-brightness-50'>
-        <div className='text-xs w-full text-center py-1 capitalize bg-white text-gray-800'>{props.name}</div>
-      </Link>
-    </div>
+    <Link to={`${props.name}`} onClick={clickHandler} className='folder py-3 mx-2 rounded-xl  w-24 h-24 flex justify-between items-center cursor-pointer hover:bg-transparent hover:border-2 hover:border-transparent flex-col'>
+        <img src={folder} alt="folder" className='w-[64px]' />
+        {/* <i class="fa-regular fa-folder px-2 text-2xl font-light"></i> */}
+        <div className='text-[17px] font-normal text-center px-1 pt-1 capitalize'>{props.name}</div>
+    </Link>
   )
 }
 

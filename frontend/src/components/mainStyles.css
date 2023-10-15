@@ -1,0 +1,25 @@
+.SuperContainer{
+    background-color: ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    /* background-color: #537895;
+    background-image: linear-gradient(to top left, white 0%, #132d7a 74%); */
+}
+
+.Container{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0;
+    padding: 20px 0;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: #2b365647;
+    
+    border-radius: 20px ;
+}

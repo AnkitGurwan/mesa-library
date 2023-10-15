@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { setPath } from '../../redux/storage/storageSlice';
-import folder from '../images/folder.png';
+import file from '../images/file.png';
 import fire from '../../config/firebase';
 import AuthContext from '../../context/auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
@@ -17,10 +17,12 @@ const File = (props) => {
   
 
   return (
-    <div className='border hover:bg-gray-200 rounded-lg relative mx-2'>
-    <div onClick={()=>{!flag?setFlag(true):setFlagg(false)}} className='py-4 mx-4 w-10 h-20 flex flex-col justify-center items-center cursor-pointer'>
-        <div className='text-xs px-1 pt-2 capitalize text-center'>{props.name?props.name.slice(0,15):""}</div>
-
+    <div className=' relative mx-2'>
+    <div onClick={()=>{!flag?setFlag(true):setFlagg(false)}} className='py-4 mx-4 w-20 h-20 flex flex-col justify-center items-center cursor-pointer'>
+        <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:-translate-x-1">
+          <img src={file} alt="file" className='w-[64px]' />
+          <div className='text-[17px] px-1 pt-2 capitalize text-center'>{props.name?props.name.slice(0,15):""}</div>
+        </div>
           {flag?<div id="myModal5" class="modal5 cursor-auto ">
                 <div class= "modal-content5 flex justify-end">
                     <div   onClick={()=>{setFlag(false)}}  class="close mt-1 h-8  flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-full w-8">&times;</div>
