@@ -15,14 +15,11 @@ const Home = () => {
     const { GetDetails } = useContext(AuthContext);
     const [newFolderName, setNewFolderName] = useState("");
     const dispatch = useDispatch();
-    // const [foldersName, setFoldersName] = useState("");
-    // const [filesName, setFilesName] = useState("");
-    // const [uploadFilesName, setUploadFilesName] = useState("");
     const [uploadNewFile,setUploadNewFile] = useState("");
     const [added,setAdded] = useState(false);
     const { superSub } = useParams();
     const Navigate = useNavigate();
-
+    const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === superSub});
 
@@ -32,9 +29,24 @@ const Home = () => {
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == superSub});
 
-    const path =  useSelector(state => state.Files.path);
+    var path =  useSelector(state => state.Files.path);
     const getItem = async () => {
         await GetDetails();
+        
+        const x = localStorage.getItem('pathAdmin');
+        var str = "";
+        var pathArray = ["root"];
+        for(let i=0; i<x.length;i++)
+        {
+            if(x[i]==='$')
+            {
+                pathArray.push(str);
+                str = "";
+            }
+            else str+=x[i];
+        }
+        path = pathArray;
+        setPathState(path);
     }
     useEffect(()=>{
         getItem();
@@ -222,17 +234,24 @@ const Home = () => {
     const pathHandler = (e) => {
         dispatch(setUpdatePath(e.target.innerText));
         var x = "";
-        for(let i=0;i<path.length;i++)
+        var y = "";
+        for(let i=0;i<pathState.length;i++)
         {
-            x+="/";
-            x+=path[i];
-            if(e.target.innerText === path[i])
+            x += "/";
+            x += pathState[i];
+            if(i != 0)
+            {
+                y += pathState[i];
+                y+="$";
+            }
+            if(e.target.innerText === pathState[i])
             break;
             
         }
+        localStorage.setItem('pathAdmin',y);
         Navigate(`${x}`);
-        
     }
+
   return (
     <div>
         <div className='w-full h-16 text-end border-b flex items-center justify-end'>
@@ -241,9 +260,9 @@ const Home = () => {
         <div className='flex justify-between items-center py-3 border-b'>
             <div className='flex mx-6'>
                 {
-                path
+                pathState
                 ?
-                path.map((indPath)=>{return <div className='flex items-center mr-1'><button onClick={pathHandler} className='mr-3'>{indPath}</button>
+                pathState.map((indPath)=>{return <div className='flex items-center mr-1'><button onClick={pathHandler} className='mr-3'>{indPath}</button>
                 <div className='mr-3'>{`>`}</div></div>}):""
                 }
                 

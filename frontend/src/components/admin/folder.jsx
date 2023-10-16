@@ -15,6 +15,14 @@ const Folder = (props) => {
   
   const clickHandler = () => {
     dispatch(setPath(props.name));
+    var x = "";
+    if(localStorage.getItem('pathAdmin'))
+    {
+        x = localStorage.getItem('pathAdmin')
+    }
+    x += props.name;
+    x += "$";
+    localStorage.setItem('pathAdmin',x);
   }
 
   const deleteHandler = () => {

@@ -19,7 +19,7 @@ const HomePage = () => {
     
     useEffect(()=>{
         getItem();
-        
+        localStorage.setItem('pathAdmin',"");
     },[]);
 
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);

@@ -7,9 +7,17 @@ import "react-toastify/dist/ReactToastify.css";
 const Folder = (props) => {
     const dispatch = useDispatch();
   
-  const clickHandler = () => {
-    dispatch(setUserPath(props.name));
-  }
+    const clickHandler = () => {
+      dispatch(setUserPath(props.name));
+      var x = "";
+      if(localStorage.getItem('pathAdmin'))
+      {
+          x = localStorage.getItem('pathAdmin')
+      }
+      x += props.name;
+      x += "$";
+      localStorage.setItem('pathAdmin',x);
+    }
 
   return (
     <div className='hover:scale-105 w-36 mx-4 border-gray-400 relative text-white font-semibold bg-[url("https://thumbs.dreamstime.com/b/lot-books-lying-table-colored-retro-style-vector-image-236287545.jpg")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
