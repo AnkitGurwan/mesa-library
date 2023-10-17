@@ -56,7 +56,7 @@ const AuthState = (props) => {
             dispatch(setReduxUploadedFiles(uploadData));
         })
 
-        
+        return 200;
         
     }
 

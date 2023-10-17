@@ -7,9 +7,17 @@ import "react-toastify/dist/ReactToastify.css";
 const Folder = (props) => {
     const dispatch = useDispatch();
   
-  const clickHandler = () => {
-    dispatch(setUserPath(props.name));
-  }
+    const clickHandler = () => {
+      dispatch(setUserPath(props.name));
+      var x = "";
+      if(localStorage.getItem('pathAdmin'))
+      {
+          x = localStorage.getItem('pathAdmin')
+      }
+      x += props.name;
+      x += "$";
+      localStorage.setItem('pathAdmin',x);
+    }
 
   return (
     <div className='folder hover:scale-105  relative text-white font-semibold bg-[]' style={{"background-image":'url("https://www.clearias.com/up/UPSC-Studymaterials-of-ClearIAS.png")',"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white", 'backgroundBrightness':"" }}>

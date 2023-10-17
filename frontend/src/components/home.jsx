@@ -11,6 +11,7 @@ import { setUpdatePath } from '../redux/storage/storageSlice';
 import { Spinner } from '@material-tailwind/react';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import Loader from './loader';
 
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
@@ -20,12 +21,12 @@ const Home = () => {
     const [added,setAdded] = useState(false);
     const [rootPath,setRootPath] = useState([]);
     const [newFolderAdd,setNewFolderAdd]  = useState(false);
+    const [loading,setLoading]  = useState(true);
     const [newFileAdd,setNewFileAdd]  = useState(false);
     const [newUploadFileAdd,setNewUploadFileAdd]  = useState(false);
     const Navigate = useNavigate();
 
     const path =  useSelector(state => state.Files.path);
-    console.log("ppp",path)
     
 
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
@@ -38,7 +39,10 @@ const Home = () => {
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
 
     const getItem = async () => {
-        await GetDetails();
+        const x= await GetDetails();
+        if(x===200)setLoading(false);
+
+        localStorage.setItem('pathAdmin',"");
     }
     
     useEffect(()=>{
@@ -241,19 +245,7 @@ const Home = () => {
     const submit = async (e)=>{
     }
 
-    const pathHandler = (e) => {
-        dispatch(setUpdatePath(e.target.innerText));
-        var x = "";
-        for(let i=0;i<path.length;i++)
-        {
-            x+="/";
-            x+=path[i];
-            if(e.target.innerText === path[i])
-            break;
-            
-        }
-        Navigate(`${x}`);
-    }
+    
     
 
   return (
@@ -263,13 +255,8 @@ const Home = () => {
         </div>
         <div className='flex justify-between items-center py-3 border-b'>
             <div className='w-40'>
-                {rootPath.length 
-                ?
-                rootPath.map((indPath)=>{<div className='flex mx-4'><Link onClick={pathHandler} className='mx-4'>{indPath}</Link>
-                <div>{`>`}</div></div>})
-                :
+                
                 <div className='mx-6 cursor-pointer'>root</div>
-                }
                 
             </div>
             
@@ -405,6 +392,11 @@ const Home = () => {
                 </div>
             
         </div>
+
+        {loading?
+        <div className='h-1/2 flex items-center justify-center'><Loader/></div>
+        :
+        <div>
         <div className='flex flex-col border-b pb-4'>
             <div className='text-center pt-2 pb-3'>All Folders</div>
             <div className="flex mx-8 flex-wrap">
@@ -439,6 +431,7 @@ const Home = () => {
             </div>
                                 
         </div>
+        </div>}
 
         
 

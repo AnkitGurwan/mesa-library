@@ -13,7 +13,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const { superSub } = useParams();
     const Navigate = useNavigate();
-
+    const [pathState,setPathState] = useState("");
     const allFoldersName =  useSelector(state => state.Files.allFoldersNameStore);
     const foldersName = allFoldersName.filter((eachFolder)=>{return eachFolder.parent === superSub});
 
@@ -23,11 +23,26 @@ const Home = () => {
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == superSub});
 
-    const path =  useSelector(state => state.Files.userPath);
+    var path =  useSelector(state => state.Files.userPath);
 
     const getItem = async () => {
         await GetDetails();
+        const x = localStorage.getItem('pathAdmin');
+        var str = "";
+        var pathArray = ["main"];
+        for(let i=0; i<x.length;i++)
+        {
+            if(x[i]==='$')
+            {
+                pathArray.push(str);
+                str = "";
+            }
+            else str+=x[i];
+        }
+        path = pathArray;
+        setPathState(path);
     }
+    
     useEffect(()=>{
         getItem();
     },[]);
@@ -35,16 +50,22 @@ const Home = () => {
     const pathHandler = (e) => {
         dispatch(setUserUpdatePath(e.target.innerText));
         var x = "";
-        for(let i=0;i<path.length;i++)
+        var y = "";
+        for(let i=0;i<pathState.length;i++)
         {
-            x+="/";
-            x+=path[i];
-            if(e.target.innerText === path[i])
+            x += "/";
+            x += pathState[i];
+            if(i != 0)
+            {
+                y += pathState[i];
+                y+="$";
+            }
+            if(e.target.innerText === pathState[i])
             break;
             
         }
+        localStorage.setItem('pathAdmin',y);
         Navigate(`${x}`);
-        
     }
   return (
     <div>
@@ -54,9 +75,9 @@ const Home = () => {
         <div className='flex justify-between items-center py-3 border-b'>
             <div className='flex mx-6'>
                 {
-                path
+                pathState
                 ?
-                path.map((indPath)=>{return <div className='flex items-center mr-1'><button onClick={pathHandler} className='mr-3'>{indPath}</button>
+                pathState.map((indPath)=>{return <div className='flex items-center mr-1'><button onClick={pathHandler} className='mr-3'>{indPath}</button>
                 <div className='mr-3'>{`>`}</div></div>}):""
                 }
                 
