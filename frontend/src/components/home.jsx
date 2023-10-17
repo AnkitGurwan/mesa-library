@@ -234,8 +234,6 @@ const Home = () => {
         }
     }
 
-   
-
     const onChangeHandler = (e) => {
         (setNewFolderName(e.target.value));
     }
@@ -255,21 +253,6 @@ const Home = () => {
             
         }
         Navigate(`${x}`);
-    }
-
-    const handleClick = (f)=> {
-        // const DeleteFolderRef = fire.storage().ref(`folders/12345/${name}`);
-        // DeleteFolderRef.delete().then(()=>{console.log('deleted')}).catch((error)=>{console.log(error)})
-        // fire.deleteObj(foldersName.filter((folder)=>{
-        //     return name == folder.name
-        // }))
-
-        // foldersName = foldersName.filter((f)=>{
-        //     return folder.name != name;
-        // }) 
-
-        fire.firestore().collection("folders").doc(`${f.name}`).delete().then(()=>{console.log('deleted')}).catch((error)=>{console.log(error)})
-        // get().then((querySnapshot)=>{querySnapshot.forEach((doc)=>{console.log(doc.data())})}))
     }
     
 

@@ -72,5 +72,42 @@
 
   }
 
+  .SuperContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 3%;
+    /* background-color: #537895;
+    background-image: linear-gradient(to top left, white 0%, #132d7a 74%); */
+}
 
+.Container{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin: 2% 0;
+    padding: 15px 0;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: #2b365647;
+    border-radius: 20px ;
+}
+
+.folder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
   
+@media screen and (max-width:450px) {
+  .folder{
+    width: 200px;
+  }
+  .folder{
+    font-size: 30px;
+  }
+}

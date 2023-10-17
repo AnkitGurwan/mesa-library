@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { setUserPath } from '../../redux/storage/storageSlice';
-import folder from '../images/folder.png'
 import "react-toastify/dist/ReactToastify.css";
 
 const Folder = (props) => {
@@ -13,11 +12,11 @@ const Folder = (props) => {
   }
 
   return (
-    <Link to={`${props.name}`} onClick={clickHandler} className='folder py-3 mx-2 w-24 h-24 flex justify-between items-center cursor-pointer flex-col transition ease-in-out delay-150 hover:-translate-y-1 hover:-translate-x-1'>
-        <img src={folder} alt="folder" className='w-[64px]' />
-        {/* <i class="fa-regular fa-folder px-2 text-2xl font-light"></i> */}
-        <div className='text-[17px] font-normal text-center px-1 pt-1 capitalize'>{props.name}</div>
-    </Link>
+    <div className='folder hover:scale-105  relative text-white font-semibold bg-[]' style={{"background-image":'url("https://www.clearias.com/up/UPSC-Studymaterials-of-ClearIAS.png")',"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white", 'backgroundBrightness':"" }}>
+      <Link to={`${props.name}`} onClick={clickHandler} className='w-60 h-40 flex justify-end items-start cursor-pointer '>
+        <div className='text-[15px] mr-1 mt-1 p-1 text-center capitalize bg-white text-gray-800 rounded-md'>{props.name}</div>
+      </Link>
+    </div>
   )
 }
 
