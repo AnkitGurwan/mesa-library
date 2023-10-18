@@ -96,18 +96,11 @@
     border-radius: 20px ;
 }
 
-.folder{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+
+
   
-@media screen and (max-width:450px) {
+/* @media screen and (max-width:450px) {
   .folder{
     width: 200px;
   }
-  .folder{
-    font-size: 30px;
-  }
-}
+} */

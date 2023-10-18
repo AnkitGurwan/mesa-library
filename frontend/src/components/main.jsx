@@ -42,12 +42,12 @@ const HomePage = () => {
             <div className='w-full ' style={{'background-image': 'linear-gradient(to top left, white 0%, #132d7a 74%)'}}>
                 <div className='w-full h-1/2 text-white'>
                     <div className='flex justify-between items-center mx-8 py-4'>
-                        <div className='text-3xl font-bold pl-4 pt-4'>MESA Library</div>
-                        <button className='text-white text-lg font-semibold hover:underline' onClick={logOutHandler}>Log Out
+                        <div className='text-3xl font-bold pl-4 pt-4 max-[450px]:text-2xl'>MESA Library</div>
+                        <button className='text-white text-lg font-semibold hover:underline max-[450px]:text-xl' onClick={logOutHandler}>Log Out
                         </button>
                     </div>
                     <div className='mx-4 mt-5 flex flex-col items-center'>
-                        <div className='text-3xl font-bold p-1'>Welcome Ankit Gurwan 👋</div>
+                        <div className='text-3xl font-bold p-1 max-[450px]:text-2xl'>Welcome Ankit Gurwan 👋</div>
                         <div className='text-xl font-semibold pt-1'>Mechanical Engineer 👨‍🔧</div>
                     </div>
                     <a 
@@ -61,10 +61,10 @@ const HomePage = () => {
                 {/* material */}
                 <div id='material' className='SuperContainer w-full px-4 pt-2 pb-5'>
                     <div className='Container flex flex-col my-4 mx-32' >
-                        <div className='text-3xl text-start text-white font-bold pt-2 pb-8 '>ALL SEMESTERS</div>
-                        <div className="folders flex flex-wrap justify-center align-center text-center gap-8 mx-8 py-2">
+                        <div className='text-3xl text-start text-white font-bold pt-2 pb-8 max-[450px]:text-2xl'>ALL SEMESTERS</div>
+                        <div className=" flex flex-wrap justify-center align-center text-center gap-8 mx-8 py-2">
                             {foldersName ? foldersName.map((folder) => (
-                                <div className='shrink-1 '>
+                                <div className='max-[450px]:w-[200px]'>
                                     <Folder key={folder.userId} parent={folder.parent} name={folder.name} />
                                 </div>
                             )) 
@@ -80,8 +80,8 @@ const HomePage = () => {
                 {/* guides */}
                 <div id='guides' className='SuperContainer w-full p-4' >
                     <div className='Container flex flex-col pb-4 mx-32'>
-                        <div className='p text-2xl text-white font-bold py-6 max-[450px]:text-s'>SEMESTER GUIDES</div>
-                        <div className="folder my-4 flex mx-8 py-2 flex-wrap">
+                        <div className='text-3xl text-white font-bold py-6 max-[450px]:text-xl'>SEMESTER GUIDES</div>
+                        <div className="flex flex-wrap justify-center align-center text-center mx-8 py-2">
                             {filesName ? filesName.map((file) => (
                                 <div><File key={file.userId} parent={file.parent} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                             )) 
