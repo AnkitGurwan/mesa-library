@@ -37,7 +37,9 @@ const Home = () => {
             if(x[i]==='$')
             {
                 pathArray.push(str);
+                if(str === exams)break;
                 str = "";
+                
             }
             else str+=x[i];
         }

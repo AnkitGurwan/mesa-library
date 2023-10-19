@@ -33,6 +33,7 @@ const Home = () => {
     const getItem = async () => {
         await GetDetails();
         const x = localStorage.getItem('pathAdmin');
+
         var str = "";
         var pathArray = ["main"];
         for(let i=0; i<x.length;i++)
@@ -40,10 +41,13 @@ const Home = () => {
             if(x[i]==='$')
             {
                 pathArray.push(str);
+                if(str === course)break;
                 str = "";
+                
             }
             else str+=x[i];
         }
+
         path = pathArray;
         setPathState(path);
     }

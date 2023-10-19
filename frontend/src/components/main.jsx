@@ -60,9 +60,9 @@ const HomePage = () => {
 
                 {/* material */}
                 <div id='material' className='SuperContainer w-full px-4 pt-2 pb-5'>
-                    <div className='Container flex flex-col my-4 mx-32' >
-                        <div className='text-3xl text-start text-white font-bold pt-2 pb-8 max-[450px]:text-2xl'>ALL SEMESTERS</div>
-                        <div className=" flex flex-wrap justify-center align-center text-center gap-8 mx-8 py-2">
+                    <div className='Container flex flex-col my-2 md:my-4 mx-12 md:mx-32' >
+                        <div className='text-2xl text-start text-white font-bold pt-2 pb-8 max-[450px]:text-3xl'>ALL SEMESTERS</div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mx-8 py-2">
                             {foldersName ? foldersName.map((folder) => (
                                 <div className='max-[450px]:w-[200px]'>
                                     <Folder key={folder.userId} parent={folder.parent} name={folder.name} />
@@ -79,8 +79,8 @@ const HomePage = () => {
 
                 {/* guides */}
                 <div id='guides' className='SuperContainer w-full p-4' >
-                    <div className='Container flex flex-col pb-4 mx-32'>
-                        <div className='text-3xl text-white font-bold py-6 max-[450px]:text-xl'>SEMESTER GUIDES</div>
+                    <div className='Container flex flex-col pb-2 md:pb-4 mx-12 md:mx-32'>
+                        <div className='text-2xl text-white font-bold py-4 max-[450px]:text-xl'>SEMESTER GUIDES</div>
                         <div className="flex flex-wrap justify-center align-center text-center mx-8 py-2">
                             {filesName ? filesName.map((file) => (
                                 <div><File key={file.userId} parent={file.parent} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
