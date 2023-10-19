@@ -20,8 +20,8 @@ const Folder = (props) => {
     }
 
   return (
-    <div className='hover:scale-105 w-full border-gray-400 relative text-white font-semibold bg-[url("https://thumbs.dreamstime.com/b/lot-books-lying-table-colored-retro-style-vector-image-236287545.jpg")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
-      <Link to={`${props.name}`} onClick={clickHandler} className='w-full h-28 flex justify-end items-start cursor-pointer backdrop-brightness-75'>
+    <div className='flex align-center justify-center hover:scale-105 w-full border-gray-400 relative text-white font-semibold bg-[url("https://thumbs.dreamstime.com/b/lot-books-lying-table-colored-retro-style-vector-image-236287545.jpg")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
+      <Link to={`${props.name}`} onClick={clickHandler} className='w-20 md:w-32 lg:w-56 h-20 md:h-24 flex justify-end items-start cursor-pointer backdrop-brightness-75'>
         <div className='text-xs mr-1 mt-1 p-1 text-center capitalize bg-white text-gray-800'>{props.name}</div>
       </Link>
     </div>

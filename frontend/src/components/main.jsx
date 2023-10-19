@@ -10,6 +10,7 @@ import Folder from './user/userFolder';
 import File from './user/userFile';
 import Upload from './admin/upload';
 import "./styles.css";
+import Lottie from './user/courselottie';
 
 const HomePage = () => {
     const { logOut,GetDetails } = useContext(AuthContext);
@@ -59,7 +60,7 @@ const HomePage = () => {
                 </div>
 
                 {/* material */}
-                <div id='material' className='SuperContainer w-full px-4 pt-2 pb-5'>
+                <div id='material' className='SuperContainer w-full px-4 pt-2 pb-5 z-10'>
                     <div className='Container flex flex-col my-2 md:my-4 mx-12 md:mx-32' >
                         <div className='text-2xl text-start text-white font-bold pt-2 pb-8 max-[450px]:text-3xl'>ALL SEMESTERS</div>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mx-8 py-2">
@@ -94,6 +95,7 @@ const HomePage = () => {
                 
                 
             </div>
+            <div className='absolute top-4 left-4 z-0'><Lottie/></div>
         </div>
     )
 }
