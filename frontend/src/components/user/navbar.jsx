@@ -5,7 +5,7 @@ import logo from '../images/mesa-logo.png';
 const Navbar = () => {
     const Navigate = useNavigate();
     return (
-            <div className='z-10 w-full h-10 md:h-16 flex items-center justify-between bg-blue-900 font-semibold text-white absolute top-0'>
+            <div className='z-10 w-full h-20 md:h-16 flex items-center justify-between bg-blue-900 font-semibold text-white absolute top-0'>
                 <div className='bg-white ml-3 md:ml-6 rounded-md'>
                     <img src= {logo} alt="logo" className="h-12 w-32 object-fit" />
                 </div>

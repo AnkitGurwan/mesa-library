@@ -9,7 +9,7 @@ const lottie = () => {
         <div class="">
             <div class="">
                 <Lottie
-                    className='h-[400px] w-[400px]'
+                    className='h-[200px] md:h-[400px] w-[150px] md:w-[400px]'
                     loop
                     animationData={lottieJson}
                     play

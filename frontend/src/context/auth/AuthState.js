@@ -68,7 +68,7 @@ const AuthState = (props) => {
             },
             body: JSON.stringify({ email, header,body }),
         });
-        
+        console.log(response.json())
         return response.status;
     }
 

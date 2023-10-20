@@ -1,6 +1,14 @@
 import dotenv from 'dotenv';
 dotenv.config({path:'Config/.env'});
 
+import nodemailer from 'nodemailer';
+import { google } from 'googleapis';
+
+
+
+const oAuthClient = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI)
+oAuthClient.setCredentials({ refresh_token: process.env.REFRESH_TOKEN })
+
 
 export const sendFeedbackEmail = async(email, body, subject) => {
 

@@ -58,23 +58,22 @@ const Login = () => {
     }
 
     return (
-        <div className='h-full w-full flex overflow-y-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
+        <div className='h-full w-full flex flex-col overflow-y-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
 
-            <div className='w-1/2 h-full flex justify-center items-center flex-col '>
+            <div className='w-full md:w-1/2 p-8 md:p-0 h-1/3 md:h-full flex justify-center items-center flex-col '>
                 <img className='h-full' src='https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg'/>  
-                
                
             </div>
             
-            <div className='h-full w-1/2 flex justify-center items-center flex-col'>
-            <div className='flex items-center'>
-                <img src= {logo} alt="logo" className="h-20 w-36 object-fit" />
-                <div className="header text-2xl container text-right tracking-wider font-bold text-blue-900">
+            <div className='h-2/3 md:h-full w-full md:w-1/2 flex justify-center items-center flex-col mb-12 md:my-0'>
+            <div className='flex items-center my-2 md:my-0'>
+                <img src= {logo} alt="logo" className="h-12 md:h-20 w-20  md:w-36 object-fit" />
+                <div className="header text-lg md:text-2xl container text-right tracking-wider font-bold text-blue-900">
                     Welcome to MESA Library!
                 </div>
             </div>
             <form onSubmit={submitHandler}>
-                <div class="relative mb-4 "  data-te-input-wrapper-init>
+                <div class="relative mb-2 md:mb-4 "  data-te-input-wrapper-init>
                     <input
                     type="email"
                     class="border outline-0  py-2 px-3 w-72 rounded-xl focus:outline-4 focus:outline-blue-300"
@@ -87,7 +86,7 @@ const Login = () => {
                    
                 </div>
 
-                <div class="relative mb-4">
+                <div class="relative mb-2 md:mb-4">
                     <input
                     type="password"
                     class="border outline-0 py-2 px-3 w-72 rounded-xl focus:outline-4 focus:outline-blue-300 "

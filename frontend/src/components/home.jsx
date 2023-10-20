@@ -253,23 +253,19 @@ const Home = () => {
         <div className='w-full h-16 text-end border-b flex items-center justify-end bg-white'>
             <button onClick={()=>{Navigate('/')}} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Log Out</button>
         </div>
-        <div className='flex justify-between items-center py-3 border-b'>
-            <div className='w-40'>
-                
-                <div className='mx-6 cursor-pointer'>root</div>
-                
-            </div>
+        <div className='w-full flex justify-end items-center py-3 border-b'>
             
-            <div className='mr-8 flex'>
-                <form onSubmit={handleUpload} className='flex items-center w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-upload px-2"></i>
+            
+            <div className='mr-2 md:mr-8 flex'>
+                <form onSubmit={handleUpload} className='flex items-center w-32 md:w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                    <i class="fa-solid fa-upload px-1 md:px-2"></i>
                     <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/>
                     {
                     uploadNewFile
                     ?
                     newUploadFileAdd
                     ?
-                    <div className='py-1 px-4 my-1'>
+                    <div className='py-1 px-2 md:px-4 my-1'>
                         <Spinner/>
                     </div>
                     :
@@ -277,13 +273,13 @@ const Home = () => {
                     :
                     ""}
                 </form>
-                <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-file px-2"></i>
-                    <div className='px-1'>Create File</div>
+                <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-1 md:mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                    <i class="fa-solid fa-file px-1 md:px-2"></i>
+                    <div className='px-1 text-xs md:text-lg'>Create File</div>
                 </button>
                 <button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='flex items-center border py-1 px-1 mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-folder px-2"></i>
-                    <div  className='px-1'>Add Folder</div>
+                    <div  className='px-1 text-xs md:text-lg'>Add Folder</div>
                 </button>
                 
                 
@@ -291,7 +287,7 @@ const Home = () => {
             <div id="myModal" class="modal2">
             <div class="modal-content3">
                 <button onClick={()=>{document.getElementById("myModal").style.display="none"}} class="close mt-1 h-8 flex justify-center items-center cursor-pointer hover:bg-gray-200 rounded-full w-8">&times;</button>
-                    <form class="w-60 mx-auto bg-white px-2" onSubmit={submit}>
+                    <form class="w-60 mx-auto bg-white px-1 md:px-2" onSubmit={submit}>
                         
                     <div class="mb-1">
                         
@@ -394,12 +390,12 @@ const Home = () => {
         </div>
 
         {loading?
-        <div className='h-1/2 flex items-center justify-center'><Loader/></div>
+        <div className='h-1/2 flex items-center  justify-center'><Loader/></div>
         :
         <div>
-        <div className='flex flex-col border-b pb-4'>
-            <div className='text-center pt-2 pb-3'>All Folders</div>
-            <div className="flex mx-8 flex-wrap">
+        <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
+            <div className='text-center pt-2 pb-3 md:pl-2'>All Folders</div>
+            <div className="grid grid-cols-2 md:grid-cols-6">
                 {foldersName ? foldersName.map((folder) => (
                     <div><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
@@ -408,9 +404,9 @@ const Home = () => {
             </div>
                                 
         </div>
-        <div className='flex flex-col border-b pb-4'>
-            <div className='text-center pt-2 pb-3'>Created Files</div>
-            <div className="flex mx-8">
+        <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
+            <div className='text-center pt-2 pb-3 md:pl-2'>Created Files</div>
+            <div className="grid grid-cols-2 md:grid-cols-6">
                 {filesName ? filesName.map((file) => (
                     <div><File key={file.userId} parent={file.parent} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
@@ -420,9 +416,9 @@ const Home = () => {
                                 
         </div>
 
-        <div className='flex flex-col'>
+        <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
             <div className='text-center pt-2 pb-3'>Uploaded Files</div>
-            <div className="flex mx-8">
+            <div className="grid grid-cols-2 md:grid-cols-6">
                 {uploadFilesName ? uploadFilesName.map((upload) => (
                     <div><Upload key={upload.userId} parent={upload.parent} name={upload.name} url={upload.url}/></div>
                 )) 

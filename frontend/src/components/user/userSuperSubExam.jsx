@@ -89,13 +89,13 @@ const Home = () => {
   return (
     <div className='relative h-screen'>
         <Navbar/>
-        <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
-            <div className='flex mx-5'>
+        <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-20 md:top-16 w-full h-12'>
+            <div className='flex mx-2 md:mx-5'>
                 {
                 pathState
                 ?
-                pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-2 cursor-pointer capitalize hover:bg-blue-400 px-1 rounded-sm hover:text-white'>{indPath}</button>
-                <div className='mr-2'>{`>`}</div></div>}):""
+                pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-1 md:mr-2 cursor-pointer text-[16px] md:text-lg capitalize hover:bg-blue-400 px-1 rounded-sm hover:text-white'>{indPath}</button>
+                <div className='mr-1 md:mr-2'>{`>`}</div></div>}):""
                 }
             </div>
         </div>
@@ -103,9 +103,9 @@ const Home = () => {
         <div className='absolute top-32 w-full h-auto z-10'>
 
         {foldersName.length?
-        <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium text-gray-700'>
-                <div className='text-start py-4 pl-8 font-bold text-white text-2xl'>All Courses</div>
-                <div className="grid grid-cols-4 gap-4 mx-6 my-2">
+        <div className='h-auto rounded-md my-7 md:my-4 ml-2 md:ml-6 flex flex-col pb-3 md:pb-6 font-semibold md:font-medium'>
+                <div className='text-start py-4 pl-8 font-semibold md:font-bold text-white text-2xl'>All Courses</div>
+                <div className="grid grid-cols-4 lg:grid-cols-6 gap-4 mx-6 my-2">
                     {foldersName.length ? foldersName.map((folder) => (
                         <div className='mx-2 border-2 border-gray-400'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                     )) 
@@ -117,14 +117,14 @@ const Home = () => {
             :""}
 
         {filesName.length?
-        <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium text-gray-700'>
-            <div className='flex items-cente pl-7'>
-                <span class="material-symbols-outlined">
+        <div className='overflow-y-hidden w-4/5 md:w-full rounded-md my-4 pl-2 md:pl-6 flex flex-col pb-3 md:pb-6 font-medium text-gray-700'>
+            <div className='flex items-cente pl-3 md:pl-7'>
+                <span class="material-symbols-outlined text-3xl">
                 description
                 </span>
-                <div className='py-4 pl-1 font-bold text-2xl'>Created Files</div>
+                <div className='py-4 pl-1 font-semibold md:font-bold text-2xl'>Created Files</div>
             </div>
-            <div className="grid grid-cols-5 gap-4 mx-6 my-2">
+            <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4 mx-0 md:mx-6 my-2">
                 {filesName.length ? filesName.map((file) => (
                     <div className='mx-2 border-2 border-gray-400'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
@@ -137,14 +137,14 @@ const Home = () => {
         ""}
 
         {uploadFilesName.length?
-        <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium bg-blue-400'>
-            <div className='flex items-center text-white pl-7'>
+        <div className='overflow-y-hidden w-4/5 md:w-full rounded-md my-4 pl-2 md:pl-6 flex flex-col pb-3 md:pb-6 font-medium text-gray-700'>
+            <div className='flex items-center text-white pl-3 md:pl-7'>
                 <span class="material-symbols-outlined">
                 picture_as_pdf
                 </span>
-                <div className='py-4 pl-1 font-bold text-white text-2xl'>Files/PDF</div>
+                <div className='py-4 pl-1 font-semibold md:font-bold text-white text-2xl'>Files/PDF</div>
             </div>
-            <div className="grid grid-cols-5 gap-4 mx-6 my-2">
+            <div className="grid grid-cols-5 gap-4 mx-0 md:mx-6 my-2">
                 {uploadFilesName.length ? uploadFilesName.map((upload) => (
                     <div className='mx-2 border-2 text-white text-start overflow-hidden'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
                 )) 
