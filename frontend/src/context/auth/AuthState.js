@@ -37,7 +37,7 @@ const AuthState = (props) => {
         
         const tenantID = process.env.REACT_APP_MICROSOFT_GRAPH_TENANT_ID;
         const logoutEndpoint = `https://login.microsoftonline.com/${tenantID}/oauth2/v2.0/logout?post_logout_redirect_uri=${process.env.REACT_APP_FRONTEND_URL}`;
-        alert(logoutEndpoint)
+       
         window.location.href = logoutEndpoint;
     }
 
@@ -60,7 +60,19 @@ const AuthState = (props) => {
         
     }
 
-    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails}}>
+    const sendFeedback = async (email, header,body)=>{
+        const response = await fetch(`${url}/user/feedback`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, header,body }),
+        });
+        
+        return response.status;
+    }
+
+    return (<AuthContext.Provider value={{ userLogin,getToken ,logOut , studInfo ,setStudInfo,GetDetails,sendFeedback}}>
                 {props.children}
             </AuthContext.Provider>)
 }

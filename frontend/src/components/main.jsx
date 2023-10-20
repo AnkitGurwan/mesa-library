@@ -1,4 +1,4 @@
-import React , { useContext,useEffect } from 'react';
+import React , { useContext,useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../context/auth/AuthContext';
 import { useSearchParams } from 'react-router-dom';
@@ -10,12 +10,52 @@ import Folder from './user/userFolder';
 import File from './user/userFile';
 import Upload from './admin/upload';
 import "./styles.css";
+import Lottie from './user/courselottie';
+import LoaderLottie from './user/loaderlottie';
+
 
 const HomePage = () => {
-    const { logOut,GetDetails } = useContext(AuthContext);
+    const { logOut,GetDetails,getToken } = useContext(AuthContext);
+    const [searchParams, setSearchParams] =useSearchParams();
+    const [loading,setLoading]=useState(true);
+    const [allowed,setAllowed]=useState(false);
+    const Navigate = useNavigate();
+
+    const funcAllowed= () => {
+        if(localStorage.getItem('studRoll'))
+        {
+          if((`210103001` < localStorage.getItem('studRoll') && localStorage.getItem('studRoll') < `210103140`) || 
+              (`220103001` < localStorage.getItem('studRoll') && localStorage.getItem('studRoll') < `220103140`) ||
+              (`230103001` < localStorage.getItem('studRoll') && localStorage.getItem('studRoll') < `230103140`)
+              (`200103001` < localStorage.getItem('studRoll') && localStorage.getItem('studRoll') < `200103140`))
+          {
+            setAllowed(true);
+            setLoading(false);
+          }
+          else 
+          {
+            setLoading(false);
+            setAllowed(false);
+          }
+        }
+        else 
+        {
+            Navigate("/");
+            (toast.error('Please login to access', {
+              position: toast.POSITION.TOP_CENTER
+          }));
+        } 
+      }
 
     const getItem = async () => {
+        const code = searchParams.get('code');  
+        
+        if(localStorage.getItem('studName') === null && code)
+            await getToken(code);
+
         await GetDetails();
+
+        funcAllowed();
     }
     
     useEffect(()=>{
@@ -38,16 +78,22 @@ const HomePage = () => {
     }
 
     return (
-        <div>
-            <div className='w-full ' style={{'background-image': 'linear-gradient(to top left, white 0%, #132d7a 74%)'}}>
+        <div className='h-full w-full'>
+            {loading
+            ?
+            <div className='flex justify-center'><LoaderLottie/></div>
+            :
+            allowed
+            ?
+            <div className='w-full' style={{'background-image': 'linear-gradient(to top left, white 0%, #132d7a 74%)'}}>
                 <div className='w-full h-1/2 text-white'>
                     <div className='flex justify-between items-center mx-8 py-4'>
-                        <div className='text-3xl font-bold pl-4 pt-4 max-[450px]:text-2xl'>MESA Library</div>
-                        <button className='text-white text-lg font-semibold hover:underline max-[450px]:text-xl' onClick={logOutHandler}>Log Out
+                        <div className='text-xl md:text-3xl font-bold pl-2 md:pl-4 pt-0 md:pt-4'>MESA Library</div>
+                        <button className='text-white text-lg md:text-xl font-semibold hover:underline' onClick={logOutHandler}>Log Out
                         </button>
                     </div>
-                    <div className='mx-4 mt-5 flex flex-col items-center'>
-                        <div className='text-3xl font-bold p-1 max-[450px]:text-2xl'>Welcome Ankit Gurwan 👋</div>
+                    <div className='ml-4 mt-5 flex flex-col justify-center items-center'>
+                        <div className='text-2xl md:text-3xl font-bold p-1'>Welcome Ankit Gurwan 👋</div>
                         <div className='text-xl font-semibold pt-1'>Mechanical Engineer 👨‍🔧</div>
                     </div>
                     <a 
@@ -59,12 +105,12 @@ const HomePage = () => {
                 </div>
 
                 {/* material */}
-                <div id='material' className='SuperContainer w-full px-4 pt-2 pb-5'>
-                    <div className='Container flex flex-col my-2 ' >
-                        <div className='text-3xl text-start text-white font-bold pt-2 pb-8 max-[450px]:text-2xl'>ALL SEMESTERS</div>
-                        <div className="flex flex-wrap justify-center align-center text-center mx-8 py-2">
+                <div id='material' className='flex justify-center w-full md:px-4 pt-2 pb-5 z-10'>
+                    <div className='bg-[#2b365647] rounded-lg md:rounded-xl p-2 flex flex-col items-center w-full md:3/5 my-2 md:my-4 mx-12 md:mx-32' >
+                        <div className='text-xl md:text-3xl text-start text-white font-bold pt-2 pb-4 md:pb-8'>ALL SEMESTERS</div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10  mx-4 md:mx-8 py-2">
                             {foldersName ? foldersName.map((folder) => (
-                                <div className='max-[450px]:w-[200px]'>
+                                <div className=''>
                                     <Folder key={folder.userId} parent={folder.parent} name={folder.name} />
                                 </div>
                             )) 
@@ -78,8 +124,8 @@ const HomePage = () => {
                 </div>
 
                 {/* guides */}
-                <div id='guides' className='SuperContainer w-full p-4' >
-                    <div className='Container flex flex-col pb-2 md:pb-4 mx-12 md:mx-32'>
+                <div id='guides' className='flex justify-center w-full md:px-4 pt-2 pb-5 z-10' >
+                    <div className='bg-[#2b365647] rounded-lg md:rounded-xl p-2 flex flex-col items-center w-full md:3/5 my-2 md:my-4 mx-12 md:mx-32'>
                         <div className='text-2xl text-white font-bold py-4 max-[450px]:text-xl'>SEMESTER GUIDES</div>
                         <div className="flex flex-wrap justify-center align-center text-center mx-8 py-2">
                             {filesName ? filesName.map((file) => (
@@ -92,8 +138,20 @@ const HomePage = () => {
                     </div>
                 </div>
                 
-                
+                {/* <div className='absolute top-4 left-4 z-0'><Lottie/></div> */}
             </div>
+            :
+            <div class="absolute top-24 left-1/3 w-1/3">
+                <div class="max-w-md bg-white rounded-lg shadow-md p-8">
+                    <h1 class="text-3xl font-bold mb-4">404</h1>
+                    <p class="text-lg text-gray-700 mb-6">Oops! The page you're looking for could not be accessed by you.</p>
+                    <div class="bg-blue-500 text-center text-white text-xl font-bold py-2 px-4 rounded">
+                        You are not part of this Course.
+                    </div>
+                </div>
+            </div>
+            }
+            
         </div>
     )
 }

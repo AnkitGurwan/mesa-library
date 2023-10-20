@@ -17,6 +17,9 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
+import userRouter from './Views/user.js';
+app.use(userRouter);
+
 
 import authRouter from "./Views/msAuth.js"
 app.use(authRouter);

@@ -13,6 +13,7 @@ import UsersCourses from "./components/user/userCourse";
 import UserExams from "./components/user/userExams";
 import UserSubCourseExams from "./components/user/userSubCourseExam";
 import UserSuperSubExams from "./components/user/userSuperSubExam";
+import Feedback from "./components/user/feedbackUser";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
+            <Route path='/feedback' element={<Feedback/>}/>
             <Route path='/root' element={<Home/>}/>
             <Route path='/root/:course' element={<Course/>}/>
             <Route path='/root/:course/:exams' element={<Exams/>}/>

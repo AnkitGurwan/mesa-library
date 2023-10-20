@@ -8,7 +8,8 @@ import Upload from "./userUpload2";
 import { useDispatch, useSelector } from 'react-redux';
 import AuthContext from '../../context/auth/AuthContext';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
-import Lottie from './lottie';
+import Lottie from './backgroundlottie';
+import Navbar from './navbar';
 
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
@@ -37,12 +38,25 @@ const Home = () => {
             if(x[i]==='$')
             {
                 pathArray.push(str);
-                if(str === subExams)break;
+                if(str === subExams)
+                {
+                    dispatch(setUserUpdatePath(pathArray));
+                    break;
+                }
                 str = "";
                 
             }
             else str+=x[i];
         }
+
+        var newArray = "";
+        for(let i=1; i<pathArray.length; i++)
+        {
+            newArray+=pathArray[i];
+            newArray+="$";
+        }
+        localStorage.setItem('pathAdmin',newArray);
+
         path = pathArray;
         setPathState(path);
     }
@@ -74,30 +88,32 @@ const Home = () => {
     }
 
   return (
-    <div className='relative h-screen bg-[#05386B]'>
-        <div className='w-full h-16 text-end flex items-center justify-end bg-[#5CDB95] font-semibold text-white absolute top-0'>
-            <button onClick={()=>{Navigate('/')}} className='hover:underline hover:scale-105 py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer text-xl'>Log Out</button>
-        </div>
-        <div className='flex justify-between items-center py-4 text-xl bg-[#5CDB95] font-bold text-white absolute top-16 w-full h-16'>
-            <div className='flex mx-6'>
+    <div className='relative h-screen'>
+        <Navbar/>
+        <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
+            <div className='flex mx-5'>
                 {
                 pathState
                 ?
-                pathState.map((indPath)=>{return <div className='flex items-center mr-1'><button onClick={pathHandler} className='mr-3 cursor-pointer capitalize hover:bg-gray-200 px-1 rounded-sm hover:text-black'>{indPath}</button>
-                <div className='mr-3'>{`>`}</div></div>}):""
+                pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-2 cursor-pointer capitalize hover:bg-blue-400 px-1 rounded-sm hover:text-white'>{indPath}</button>
+                <div className='mr-2'>{`>`}</div></div>}):""
                 }
-                
             </div>
         </div>
             
-        <div className='absolute top-32 w-full h-auto'>
+        <div className='absolute top-28 w-full h-auto z-10'>
 
         {foldersName.length?
-        <div className='overflow-y-hidden w-full flex flex-col pb-6 font-medium'>
-            <div className='text-start py-6 pl-12 font-bold text-white text-3xl'>All Courses</div>
-            <div className="grid grid-cols-4 gap-4 mx-10 my-4 w-2/3">
+        <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium text-gray-700'>
+            <div className='flex items-center pl-7'>
+                <span class="material-symbols-outlined">
+                description
+                </span>
+                <div className='py-4 pl-1 font-bold text-2xl'>All Courses</div>
+            </div>
+            <div className="grid grid-cols-4 gap-4 mx-6 my-2">
                 {foldersName.length ? foldersName.map((folder) => (
-                    <div><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                    <div className='mx-2 border-2 border-gray-400'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
                 :
                  ""}
@@ -106,11 +122,11 @@ const Home = () => {
         </div>
         :""}
         {filesName.length?
-        <div className='flex flex-col border-b pb-4 text-white'>
-            <div className='text-start pt-4 pl-12 font-semibold text-xl'>Information Files</div>
-            <div className="flex mx-10 my-8">
+        <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium text-gray-700'>
+            <div className='text-start py-4 pl-8 font-bold  text-2xl'>Information Files</div>
+            <div className="grid grid-cols-5 gap-4 mx-6 my-2">
                 {filesName.length ? filesName.map((file) => (
-                    <div><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                    <div className='mx-2 border-2 border-gray-400'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
                 :
                  ""}
@@ -121,11 +137,11 @@ const Home = () => {
         ""}
 
         {uploadFilesName.length?
-        <div className=' text-white flex flex-col border-b pb-4'>
-            <div className='text-start pt-4 pl-12 font-semibold text-xl'>Files/PDF's</div>
-            <div className="flex mx-10 my-8 ">
+        <div className='overflow-y-hidden w-3/5 rounded-md mt-6 ml-6 flex flex-col pb-6 font-medium text-gray-700'>
+            <div className='text-start py-4 pl-8 font-bold text-2xl'>Files/PDF's</div>
+            <div className="grid grid-cols-5 gap-4 mx-6 my-2 ">
                 {uploadFilesName.length ? uploadFilesName.map((upload) => (
-                    <div><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
+                    <div className='mx-2 border-2 text-gray-700 text-start overflow-hidden'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
                 )) 
                 :
                  ""}
@@ -137,7 +153,7 @@ const Home = () => {
         </div>
 
         
-    <div className='absolute bottom-0 right-0'><Lottie/></div>
+    <div className='absolute bottom-0 right-0 z-0'><Lottie/></div>
 
             
     </div>
