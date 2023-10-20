@@ -9,7 +9,7 @@ import Upload from "./userUpload2";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
 import AuthContext from '../../context/auth/AuthContext';
-import Lottie from './examlottie';
+import Lottie from './backgroundlottie';
 import Navbar from './navbar';
 
 const Home = () => {
@@ -90,7 +90,7 @@ const Home = () => {
   return (
     <div className='relative h-screen'>
         <Navbar/>
-        <div className='flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
+        <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
             <div className='flex mx-5'>
                 {
                 pathState
@@ -102,18 +102,18 @@ const Home = () => {
         </div>
             
             
-        <div className='absolute top-28 w-full h-auto'>
+        <div className='absolute top-28 w-full h-auto z-10'>
 
-        <div className = 'overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium bg-blue-400'>
-            <div className='flex items-center text-white pl-7'>
+        <div className = 'overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium text-gray-700'>
+            <div className='flex items-center pl-7'>
                 <span class="material-symbols-outlined">
                 description
                 </span>
-                <div className='py-4 pl-1 font-bold text-white text-2xl'>All Exams</div>
+                <div className='py-4 pl-1 font-bold text-2xl'>All Exams</div>
             </div>
             <div className="grid grid-cols-4 gap-4 mx-6 my-2">
                 {foldersName.length ? foldersName.map((folder) => (
-                    <div className='mx-2 border-2 border-white'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                    <div className='mx-2 border-2 border-gray-400'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
                 :
                  ""}

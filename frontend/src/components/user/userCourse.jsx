@@ -10,7 +10,7 @@ import Upload from "./userUpload2";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
 import AuthContext from '../../context/auth/AuthContext';
-import Lottie from './examlottie';
+import Lottie from './backgroundlottie';
 import logo from '../images/mesa-logo.png';
 import Navbar from './navbar';
 
@@ -94,9 +94,9 @@ const Home = () => {
     }
 
   return (
-    <div className='relative h-screen overflow-y-hidden'>
+    <div className='relative h-full overflow-y-hidden'>
         <Navbar/>
-        <div className='flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
+        <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
             <div className='flex mx-5'>
                 {
                 pathState
@@ -106,17 +106,17 @@ const Home = () => {
                 }
             </div>
         </div>
-        <div className='absolute top-28 h-auto w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium bg-blue-400'>
-            <div className='flex items-center text-white pl-7'>
-                <span class="material-symbols-outlined">
+        <div className='z-10 absolute top-28 h-auto w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium'>
+            <div className='flex items-center text-gray-700 pl-7'>
+                <span class="material-symbols-outlined text-3xl">
                 description
                 </span>
-                <div className='py-4 pl-1 font-bold text-white text-2xl'>All Courses</div>
+                <div className='py-4 pl-1 font-semibold text-gary-700 text-2xl'>All Courses</div>
             </div>
            
             <div className="grid grid-cols-4 gap-4 mx-6 my-2">
                 {foldersName.length ? foldersName.map((folder) => (
-                    <div className='mx-2 border-2 border-white'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                    <div className='mx-2 border-2 border-gray-400'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
                 :
                  ""}
@@ -124,7 +124,7 @@ const Home = () => {
                                 
         </div>
         {filesName.length?
-        <div className='flex flex-col border-b pb-4'>
+        <div className='z-10 flex flex-col border-b pb-4'>
             <div className='text-center pt-2 pb-3'>Created Files</div>
             <div className="grid grid-cols-4 gap-4 mx-6 my-2">
                 {filesName.length ? filesName.map((file) => (
@@ -152,7 +152,7 @@ const Home = () => {
         </div>
         :
         ""}
-        <div className='absolute bottom-4 right-0'><Lottie/></div>
+        <div className='absolute bottom-0 right-0 z-0'><Lottie/></div>
             
     </div>
   )

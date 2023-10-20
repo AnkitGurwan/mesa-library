@@ -8,7 +8,7 @@ import Upload from "./userUpload2";
 import { useDispatch, useSelector } from 'react-redux';
 import AuthContext from '../../context/auth/AuthContext';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
-import Lottie from './lottie';
+import Lottie from './backgroundlottie';
 import Navbar from './navbar';
 
 const Home = () => {
@@ -90,7 +90,7 @@ const Home = () => {
   return (
     <div className='relative h-screen'>
         <Navbar/>
-        <div className='flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
+        <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
             <div className='flex mx-5'>
                 {
                 pathState
@@ -101,19 +101,19 @@ const Home = () => {
             </div>
         </div>
             
-        <div className='absolute top-28 w-full h-auto'>
+        <div className='absolute top-28 w-full h-auto z-10'>
 
         {foldersName.length?
-        <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium bg-blue-400'>
-            <div className='flex items-center text-white pl-7'>
+        <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium text-gray-700'>
+            <div className='flex items-center pl-7'>
                 <span class="material-symbols-outlined">
                 description
                 </span>
-                <div className='py-4 pl-1 font-bold text-white text-2xl'>All Courses</div>
+                <div className='py-4 pl-1 font-bold text-2xl'>All Courses</div>
             </div>
             <div className="grid grid-cols-4 gap-4 mx-6 my-2">
                 {foldersName.length ? foldersName.map((folder) => (
-                    <div className='mx-2 border-2 border-white'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                    <div className='mx-2 border-2 border-gray-400'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
                 :
                  ""}
@@ -122,11 +122,11 @@ const Home = () => {
         </div>
         :""}
         {filesName.length?
-        <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium bg-blue-400'>
-            <div className='text-start py-4 pl-8 font-bold text-white text-2xl'>Information Files</div>
+        <div className='overflow-y-hidden w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium text-gray-700'>
+            <div className='text-start py-4 pl-8 font-bold  text-2xl'>Information Files</div>
             <div className="grid grid-cols-5 gap-4 mx-6 my-2">
                 {filesName.length ? filesName.map((file) => (
-                    <div className='mx-2 border-2 border-white'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                    <div className='mx-2 border-2 border-gray-400'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
                 :
                  ""}
@@ -137,11 +137,11 @@ const Home = () => {
         ""}
 
         {uploadFilesName.length?
-        <div className='overflow-y-hidden w-3/5 rounded-md mt-6 ml-6 flex flex-col pb-6 font-medium bg-blue-400'>
-            <div className='text-start py-4 pl-8 font-bold text-white text-2xl'>Files/PDF's</div>
+        <div className='overflow-y-hidden w-3/5 rounded-md mt-6 ml-6 flex flex-col pb-6 font-medium text-gray-700'>
+            <div className='text-start py-4 pl-8 font-bold text-2xl'>Files/PDF's</div>
             <div className="grid grid-cols-5 gap-4 mx-6 my-2 ">
                 {uploadFilesName.length ? uploadFilesName.map((upload) => (
-                    <div className='mx-2 border-2 text-white text-start overflow-hidden'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
+                    <div className='mx-2 border-2 text-gray-700 text-start overflow-hidden'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
                 )) 
                 :
                  ""}
@@ -153,7 +153,7 @@ const Home = () => {
         </div>
 
         
-    <div className='absolute bottom-0 right-0'><Lottie/></div>
+    <div className='absolute bottom-0 right-0 z-0'><Lottie/></div>
 
             
     </div>
