@@ -79,18 +79,21 @@ const Home = () => {
     }
 
   return (
-    <div className='relative h-screen bg-[#05386B]'>
-        <div className='w-full h-16 text-end flex items-center justify-end bg-[#5CDB95] font-semibold text-white absolute top-0'>
-            <button onClick={()=>{Navigate('/')}} className=' hover:underline hover:scale-105 py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer text-xl'>Log Out</button>
-        </div>
-        <div className='flex justify-between items-center py-4 text-xl bg-[#5CDB95] font-bold text-white absolute top-16 w-full h-16'>
-            <div className='flex mx-6'>
-                {
-                pathState
-                ?
-                pathState.map((indPath) => { return <div className='flex items-center mr-1'><button onClick={pathHandler} className='mr-3 cursor-pointer capitalize hover:bg-gray-200 px-1 rounded-sm hover:text-black'>{indPath}</button>
-                <div className='mr-3'>{`>`}</div></div>}):""
-                }
+    <div className='relative h-screen PageContainer'>
+        <div id="Navbar" className='bg-black'>
+            <div className='w-full h-[10vh] text-end flex items-center justify-between flex-row font-semibold text-white '>
+                <div className='py-2 mt-4 px-2 ml-5 text-3xl font-bold'>Mesa Library</div>
+                <button onClick={()=>{Navigate('/')}} className=' hover:underline hover:scale-105 py-4 px-2 h-8 mr-6 rounded-sm cursor-pointer text-xl'>Log Out</button>
+            </div>
+            <div className='flex justify-between items-center py-4 text-xl font-bold text-white w-full h-6vh'>
+                <div className='flex mx-10'>
+                    {
+                    pathState
+                    ?
+                    pathState.map((indPath) => { return <div className='flex items-center mr-1'><button onClick={pathHandler} className='mr-3 cursor-pointer capitalize hover:bg-gray-200 px-1 rounded-sm hover:text-black'>{indPath}</button>
+                    <div className='mr-3'>{`>`}</div></div>}):""
+                    }
+                </div>
             </div>
         </div>
         <div className='absolute top-32 h-96 overflow-y-hidden w-full flex flex-col pb-6 font-medium'>
