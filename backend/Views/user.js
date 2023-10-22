@@ -3,6 +3,6 @@ import { sendFeedbackEmail } from '../Controllers/userController.js';
 
 const userRouter = express.Router();
 
-userRouter.get('/user/feedback',sendFeedbackEmail);
+userRouter.post('/user/feedback',sendFeedbackEmail);
 
 export default userRouter;

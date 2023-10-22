@@ -78,19 +78,19 @@ const Login = () => {
         }
     }
     return (
-        <div className='w-full h-full flex' style={{"backgroundColor":"rgb(220 252 231)"}}> 
+        <div className='w-full h-full flex flex-col md:flex-row overflow-hidden' style={{"backgroundColor":"rgb(220 252 231)"}}> 
            
 
-           <div className='w-1/2 h-full flex justify-center items-center flex-col '>
+           <div className='w-full md:w-1/2 h-1/3 md:h-full py-8 flex justify-center items-center flex-col '>
                 <img className='h-full' src='https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg'/>  
                 
                
             </div>
             
-            <div className='h-full w-1/2 flex justify-center items-center flex-col'>
-            <div className='flex items-center'>
-                <img src= {logo} alt="logo" className="h-20 w-36 object-fit" />
-                <div className="header text-2xl container text-right tracking-wider font-bold text-blue-900">
+            <div className='h-2/3 md:h-full w-full mb-12 md:w-1/2 flex justify-center items-center flex-col'>
+            <div className='flex items-center mb-2 md:mb-0'>
+                <img src= {logo} alt="logo" className="h-12 md:h-20 w-20 md:w-36 object-fit" />
+                <div className="header text-lg md:text-2xl container text-right tracking-wider font-bold text-blue-900">
                     Welcome to MESA Library!
                 </div>
             </div>

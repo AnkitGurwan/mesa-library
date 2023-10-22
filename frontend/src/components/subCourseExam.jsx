@@ -256,29 +256,21 @@ const Home = () => {
         <div className='w-full h-16 text-end border-b flex items-center justify-end'>
             <button onClick={()=>{Navigate('/')}} className='text-white bg-black py-1 px-2 h-8 mr-4 rounded-sm cursor-pointer'>Log Out</button>
         </div>
-        <div className='flex justify-between items-center py-3 border-b'>
-            <div className='flex mx-6'>
-                {
-                pathState
-                ?
-                pathState.map((indPath)=>{return <div className='flex items-center mr-1'><button onClick={pathHandler} className='mr-3'>{indPath}</button>
-                <div className='mr-3'>{`>`}</div></div>}):""
-                }
-                
-            </div>
-            <div className='mr-8 flex'>
-                <form onSubmit={handleUpload} className='flex items-center w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-upload px-2"></i>
+        <div className='flex justify-end items-center py-3 border-b'>
+            
+        <div className='mr-8 flex'>
+                <form onSubmit={handleUpload} className='flex items-center w-40 md:w-64 border mx-2 py-1 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
+                    <i class="fa-solid fa-upload px-1 md:px-2"></i>
                     <input type='file' className='px-1' placeholder='Upload File' onChange={(e)=>{setUploadNewFile(e.target.files[0])}}/>
                     {uploadNewFile?<button className='bg-blue-500 rounded-sm text-sm text-white font-medium p-1'>Submit</button>:""}
                 </form>
                 <button onClick={()=>{document.getElementById("myModal2").style.display="block"}} className='flex items-center border py-1 mx-2 px-1 rounded-sm cursor-pointer hover:bg-gray-100'>
                     <i class="fa-solid fa-file px-2"></i>
-                    <div className='px-1'>Create File</div>
+                    <div className='px-1 text-xs md:text-lg'>Create File</div>
                 </button>
-                <button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='flex items-center border py-1 px-1 mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
-                    <i class="fa-solid fa-folder px-2"></i>
-                    <div  className='px-1'>Add Folder</div>
+                <button id='myBtn' onClick={()=>{document.getElementById("myModal").style.display="block"}} className='flex items-center border py-1 px-1 mx-1 md:mx-2 rounded-sm cursor-pointer hover:bg-gray-100'>
+                    <i class="fa-solid fa-folder px-1 md:px-2"></i>
+                    <div  className='px-1 text-xs md:text-lg'>Add Folder</div>
                 </button>
                 
                 
@@ -372,9 +364,22 @@ const Home = () => {
                 </div>
             
         </div>
-        <div className='flex flex-col border-b pb-4'>
-            <div className='text-center pt-2 pb-3'>All Folders</div>
-            <div className="flex mx-8">
+
+        <div className='flex justify-between items-center py-3 border-b'>
+            <div className='flex mx-2 md:mx-6'>
+                {
+                pathState
+                ?
+                pathState.map((indPath)=>{return <div className='flex items-center mr-0 md:mr-1'><button onClick={pathHandler} className='mr-3 '>{indPath}</button>
+                <div className='mr-2 md:mr-3 text-xs md:text-lg'>{`>`}</div></div>}):""
+                }
+                
+            </div>
+        </div>
+
+        <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
+            <div className='text-center pt-2 pb-3 md:pl-2'>All Folders</div>
+            <div className="grid grid-cols-2 md:grid-cols-6">
                 {foldersName.length ? foldersName.map((folder) => (
                     <div><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
                 )) 
@@ -383,9 +388,9 @@ const Home = () => {
             </div>
                                 
         </div>
-        <div className='flex flex-col border-b pb-4'>
-            <div className='text-center pt-2 pb-3'>Created Files</div>
-            <div className="flex mx-8">
+        <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
+            <div className='text-center pt-2 pb-3 md:pl-2'>Created Files</div>
+            <div className="grid grid-cols-2 md:grid-cols-6">
                 {filesName.length ? filesName.map((file) => (
                     <div><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                 )) 
@@ -395,9 +400,9 @@ const Home = () => {
                                 
         </div>
 
-        <div className='flex flex-col border-b pb-4'>
-            <div className='text-center pt-2 pb-3'>Uploaded Files</div>
-            <div className="flex mx-8">
+        <div className='flex flex-col items-center md:items-start border-b pb-4 mx-2 md:mx-12'>
+            <div className='text-center pt-2 pb-3 md:pl-2'>Uploaded Files</div>
+            <div className="grid grid-cols-2 md:grid-cols-6">
                 {uploadFilesName.length ? uploadFilesName.map((upload) => (
                     <div><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
                 )) 

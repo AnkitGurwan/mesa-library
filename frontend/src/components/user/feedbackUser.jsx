@@ -25,7 +25,7 @@ const Feedbackpage = () => {
         toast.error('Please try again.', {
             position: toast.POSITION.TOP_CENTER
         });
-        navigate('/owner');
+        navigate('/main');
 
     }
 

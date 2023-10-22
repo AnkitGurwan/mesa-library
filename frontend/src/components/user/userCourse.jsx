@@ -9,8 +9,7 @@ import Upload from "./userUpload2";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
 import AuthContext from '../../context/auth/AuthContext';
-import Lottie from './backgroundlottie';
-import logo from '../images/mesa-logo.png';
+import BackgroundParticle from './backgroundParticle';
 import Navbar from './navbar';
 import BackgroundParticle from './backgroundParticle';
 
@@ -100,8 +99,8 @@ const Home = () => {
                 {
                 pathState
                 ?
-                pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-2 cursor-pointer capitalize hover:bg-blue-400 px-1 rounded-sm hover:text-white'>{indPath}</button>
-                <div className='mr-2'>{`>`}</div></div>}):""
+                pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-1 md:mr-2 cursor-pointer text-[16px] md:text-lg capitalize hover:bg-blue-400 px-1 rounded-sm hover:text-white'>{indPath}</button>
+                <div className='mr-1 md:mr-2'>{`>`}</div></div>}):""
                 }
             </div>
         </div> */}
@@ -153,7 +152,6 @@ const Home = () => {
             :
             ""}
         </div>
-        {/* <div className='absolute w-full  z-0'><Lottie/></div> */}
         <div className='absolute w-full  z-0'><BackgroundParticle/></div>
         
             
