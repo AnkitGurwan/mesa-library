@@ -35,12 +35,14 @@ const HomePage = () => {
           else 
           {
             setLoading(false);
-            setAllowed(false);
+            setAllowed(true);
           }
         }
         else 
         {
-            Navigate("/");
+            Navigate("/main");
+            setLoading(false);
+            setAllowed(true);
             (toast.error('Please login to access', {
               position: toast.POSITION.TOP_CENTER
           }));
@@ -72,7 +74,7 @@ const HomePage = () => {
     const allUploadFilesName= useSelector(state => state.Files.allUploadedFilesNameStore);
     const uploadFilesName = allUploadFilesName.filter((eachFolder)=>{return eachFolder.parent == "root"});
 
-    const studName = localStorage.getItem('studName').toLowerCase();
+    const studName = localStorage.getItem('studName')?localStorage.getItem('studName').toLowerCase():"";
 
     const logOutHandler = async () => {
         localStorage.clear('studName','studId','studRoll','studJob');
