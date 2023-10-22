@@ -27,7 +27,7 @@ export const sendFeedbackEmail = async(email, body, subject) => {
             }
         });
 
-        var mailOptions1 = {
+        var mailOptions = {
             from: 'ankitgurwan083@gmail.com',             // Sender Email
             to: 'a.gurwan@iitg.ac.in',                             // Email requested by user
             subject: subject,         // Subject Of The Mail
@@ -35,24 +35,10 @@ export const sendFeedbackEmail = async(email, body, subject) => {
             //Custom Mail Message With the link to confirm email address (The link contain the user id and token corresponding)
         };
 
-        var mailOptions2 = {
-            from: 'ankitgurwan083@gmail.com',             // Sender Email
-            to: email,                             // Email requested by user
-            subject: "MESA Library",         // Subject Of The Mail
-            text: `Dear user,\nWe have succesfully received your feedback. Kindly wait while we sort out the issues. `,
-            //Custom Mail Message With the link to confirm email address (The link contain the user id and token corresponding)
-        };
+     
 
 
-        transporter.sendMail(mailOptions1, function (error, info, req, res) {  // Reciving Conformation Of Sent Mail
-            if (error) {
-                console.log({ error });
-            } else {
-                console.log("Success");
-            }
-        });
-
-        transporter.sendMail(mailOptions2, function (error, info, req, res) {  // Reciving Conformation Of Sent Mail
+        transporter.sendMail(mailOptions, function (error, info, req, res) {  // Reciving Conformation Of Sent Mail
             if (error) {
                 console.log({ error });
             } else {
