@@ -7,7 +7,7 @@ import Upload from "./userUpload";
 import { useDispatch, useSelector } from 'react-redux';
 import AuthContext from '../../context/auth/AuthContext';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
-import Lottie from './backgroundlottie';
+import NoContent from './userNoContent';
 import Navbar from './navbar';
 import BackgroundParticle from './backgroundParticle';
 
@@ -90,25 +90,30 @@ const Home = () => {
   return (
     <div className='relative h-full overflow-x-hidden'>
     <Navbar pathHandler={pathHandler} pathState={pathState}/>
-   
+    {(foldersName.length||filesName.length||uploadFilesName.length)?   
     <div id='Content-Container' className='flex flex-col w-full absolute top-[140px]'>
-        <div className='z-10 w-full h-auto w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium max-[800px]:ml-2 max-[800px]:text-center max-[800px]:justify-center max-[800px]:align-center max-[800px]:ml-0'>
-            <div className='flex w-full items-center text-gray-700 pl-7 max-[800px]:text-center max-[800px]:justify-center max-[800px]:align-center max-[800px]:m-0 max-[800px]:pl-0 '>
-                <span class="material-symbols-outlined text-3xl max-[800px]:text-4xl">
-                description
-                </span>
-                <div className='py-4 pl-1 font-semibold text-gary-700 text-2xl max-[800px]:text-3xl'>All Courses</div>
+        {foldersName.length?
+            <div className='z-10 w-full h-auto w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium max-[800px]:ml-2 max-[800px]:text-center max-[800px]:justify-center max-[800px]:align-center max-[800px]:ml-0'>
+            
+                <div className='flex w-full items-center text-gray-700 pl-7 max-[800px]:text-center max-[800px]:justify-center max-[800px]:align-center max-[800px]:m-0 max-[800px]:pl-0 '>
+                    <span class="material-symbols-outlined text-3xl max-[800px]:text-4xl">
+                    description
+                    </span>
+                    <div className='py-4 pl-1 font-semibold text-gary-700 text-2xl max-[800px]:text-3xl'>All Courses</div>
+                </div>
+            
+                <div className="flex w-full ml-10 flex-wrap max-[800px]:justify-center max-[800px]:align-center max-[800px]:text-center max-[800px]:ml-0">
+                    {foldersName.length ? foldersName.map((folder) => (
+                        <div className='mx-2'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                    )) 
+                    :
+                    ""}
+                </div>
+                                    
             </div>
-        
-            <div className="flex w-full ml-10 flex-wrap max-[800px]:justify-center max-[800px]:align-center max-[800px]:text-center max-[800px]:ml-0">
-                {foldersName.length ? foldersName.map((folder) => (
-                    <div className='mx-2'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
-                )) 
-                :
-                ""}
-            </div>
-                                
-        </div>
+            :
+            ""}
+
         {filesName.length?
         <div className='z-10 flex flex-col w-full  pb-4'>
             <div className='text-start pl-[70px] pt-2 pb-3 max-[800px]:text-3xl font-semibold text-gray-700 text-2xl max-[800px]:text-center max-[800px]:pl-0'>Created Files</div>
@@ -139,6 +144,9 @@ const Home = () => {
         :
         ""}
     </div>
+    :
+    <div className='w-full h-full flex justify-center text-center align-center'><NoContent/></div>
+    }
     <div className='absolute w-full  z-0'><BackgroundParticle/></div>
     
         
