@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react'
 import AuthContext from '../../context/auth/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import '..//styles.css'
+import '..//styles.css';
+import file from '../images/user-guide.png';
 
 const File = (props) => {
   const [flag,setFlag] = useState(false);
@@ -11,10 +12,12 @@ const File = (props) => {
   
 
   return (
-    <div className='hover:scale-105 border border-gray-400 relative bg-[url("https://cdn3.vectorstock.com/i/1000x1000/49/32/user-guide-book-vector-25754932.jpg")]' style={{"background-size":"cover","background-repeat":"no-repeat","background-position": "center center","backgroundColor":"white" }}>
-      <div onClick={()=>{!flag?setFlag(true):setFlagg(false)}} className='w-full h-28 flex justify-center items-end  cursor-pointer backdrop-brightness-75'>
-        <div className='text-xs w-full py-1 bg-white capitalize text-center font-medium text-black '>{props.name?props.name.slice(0,15):""}</div>
-
+    <div className='hover:scale-105 relative mt-10 '>
+      <div onClick={()=>{!flag?setFlag(true):setFlagg(false)}} className='w-full h-28 flex justify-center items-end  cursor-pointer '>
+        <div>
+          <img src={file} alt="file" className='w-20' />
+          <div className='text-[16px] w-full py-4 bg-white capitalize text-center font-medium text-black '>{props.name?props.name.slice(0,15):""}</div>
+        </div>
           {flag
           ?
           <div id="myModal5" class="modal5 cursor-auto ">

@@ -6,14 +6,13 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Upload from "./userUpload2";
-
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserUpdatePath } from '../../redux/storage/storageSlice';
 import AuthContext from '../../context/auth/AuthContext';
 import Lottie from './backgroundlottie';
 import logo from '../images/mesa-logo.png';
 import Navbar from './navbar';
-
+import BackgroundParticle from './backgroundParticle';
 
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
@@ -95,8 +94,8 @@ const Home = () => {
 
   return (
     <div className='relative h-full overflow-y-hidden'>
-        <Navbar/>
-        <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
+        <Navbar pathHandler={pathHandler} pathState={pathState}/>
+        {/* <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
             <div className='flex mx-5'>
                 {
                 pathState
@@ -105,54 +104,58 @@ const Home = () => {
                 <div className='mr-2'>{`>`}</div></div>}):""
                 }
             </div>
-        </div>
-        <div className='z-10 absolute top-28 h-auto w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium'>
-            <div className='flex items-center text-gray-700 pl-7'>
-                <span class="material-symbols-outlined text-3xl">
-                description
-                </span>
-                <div className='py-4 pl-1 font-semibold text-gary-700 text-2xl'>All Courses</div>
+        </div> */}
+        <div id='Content-Container' className='flex flex-col w-full absolute top-[140px]'>
+            <div className='z-10 w-full h-auto w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium max-[800px]:ml-2 max-[800px]:text-center max-[800px]:justify-center max-[800px]:align-center max-[800px]:ml-0'>
+                <div className='flex w-full items-center text-gray-700 pl-7 max-[800px]:text-center max-[800px]:justify-center max-[800px]:align-center max-[800px]:m-0 max-[800px]:pl-0 '>
+                    <span class="material-symbols-outlined text-3xl max-[800px]:text-4xl">
+                    description
+                    </span>
+                    <div className='py-4 pl-1 font-semibold text-gary-700 text-2xl max-[800px]:text-3xl'>All Courses</div>
+                </div>
+            
+                <div className="flex w-full ml-10 flex-wrap max-[800px]:justify-center max-[800px]:align-center max-[800px]:text-center max-[800px]:ml-0">
+                    {foldersName.length ? foldersName.map((folder) => (
+                        <div className='mx-2'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
+                    )) 
+                    :
+                    ""}
+                </div>
+                                    
             </div>
-           
-            <div className="grid grid-cols-4 gap-4 mx-6 my-2">
-                {foldersName.length ? foldersName.map((folder) => (
-                    <div className='mx-2 border-2 border-gray-400'><Folder key={folder.userId} parent={folder.parent} name={folder.name}/></div>
-                )) 
-                :
-                 ""}
+            {filesName.length?
+            <div className='z-10 flex flex-col w-full  pb-4'>
+                <div className='text-start pl-[70px] pt-2 pb-3 max-[800px]:text-3xl font-semibold text-gray-700 text-2xl max-[800px]:text-center max-[800px]:pl-0'>Created Files</div>
+                <div className="flex flex-row gap-4 mx-20 my-2 max-[800px]:justify-center max-[800px]:align-center max-[800px]:text-center max-[800px]:mx-0">
+                    {filesName.length ? filesName.map((file) => (
+                        <div className='mx-2'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
+                    )) 
+                    :
+                    ""}
+                </div>
+                                    
             </div>
-                                
-        </div>
-        {filesName.length?
-        <div className='z-10 flex flex-col border-b pb-4'>
-            <div className='text-center pt-2 pb-3'>Created Files</div>
-            <div className="grid grid-cols-4 gap-4 mx-6 my-2">
-                {filesName.length ? filesName.map((file) => (
-                    <div className='mx-2 text-white border-2 border-white'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
-                )) 
-                :
-                 ""}
-            </div>
-                                
-        </div>
-        :
-        ""}
+            :
+            ""}
 
-        {uploadFilesName.length?
-        <div className='flex flex-col border-b pb-4'>
-            <div className='text-center pt-2 pb-3'>Uploaded Files</div>
-            <div className="grid grid-cols-4 gap-4 mx-6 my-2">
-                {uploadFilesName.length ? uploadFilesName.map((upload) => (
-                    <div className='mx-2 border-2'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
-                )) 
-                :
-                 ""}
+            {uploadFilesName.length?
+            <div className='flex flex-col border-b pb-4'>
+                <div className='text-center pt-2 pb-3'>Uploaded Files</div>
+                <div className="grid grid-cols-4 gap-4 mx-6 my-2">
+                    {uploadFilesName.length ? uploadFilesName.map((upload) => (
+                        <div className='mx-2 border-2'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
+                    )) 
+                    :
+                    ""}
+                </div>
+                                    
             </div>
-                                
+            :
+            ""}
         </div>
-        :
-        ""}
-        <div className='absolute bottom-0 right-0 z-0'><Lottie/></div>
+        {/* <div className='absolute w-full  z-0'><Lottie/></div> */}
+        <div className='absolute w-full  z-0'><BackgroundParticle/></div>
+        
             
     </div>
   )
