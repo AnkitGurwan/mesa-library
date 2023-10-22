@@ -21,7 +21,7 @@ const Navbar = ({pathState,pathHandler}) => {
                         {
                         pathState
                         ?
-                        pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-2 cursor-pointer capitalize hover:bg-blue-400 px-1 rounded-sm hover:text-white'>{indPath}</button>
+                        pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-2 cursor-pointer capitalize hover:bg-blue-900 px-1 rounded-sm hover:text-blue-200 transition ease-in-out delay-150'>{indPath}</button>
                         <div className='mr-2'>{`>`}</div></div>}):""
                         }
                     </div>

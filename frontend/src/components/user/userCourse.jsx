@@ -1,6 +1,6 @@
 import React,{useContext,useEffect,useState} from 'react';
 import Folder from './userFolder2'
-import File from './userFile2'
+import File from './userFile'
 import fire from '../../config/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -11,7 +11,6 @@ import { setUserUpdatePath } from '../../redux/storage/storageSlice';
 import AuthContext from '../../context/auth/AuthContext';
 import BackgroundParticle from './backgroundParticle';
 import Navbar from './navbar';
-import BackgroundParticle from './backgroundParticle';
 
 const Home = () => {
     const { GetDetails } = useContext(AuthContext);
@@ -92,18 +91,9 @@ const Home = () => {
     }
 
   return (
-    <div className='relative h-full overflow-y-hidden'>
+    <div className='relative h-full overflow-x-hidden'>
         <Navbar pathHandler={pathHandler} pathState={pathState}/>
-        {/* <div className='z-10 flex justify-between items-center py-3 text-lg bg-blue-200 font-bold text-gray-600 absolute top-16 w-full h-12'>
-            <div className='flex mx-5'>
-                {
-                pathState
-                ?
-                pathState.map((indPath) => { return <div className='flex items-center'><button onClick={pathHandler} className='mr-1 md:mr-2 cursor-pointer text-[16px] md:text-lg capitalize hover:bg-blue-400 px-1 rounded-sm hover:text-white'>{indPath}</button>
-                <div className='mr-1 md:mr-2'>{`>`}</div></div>}):""
-                }
-            </div>
-        </div> */}
+       
         <div id='Content-Container' className='flex flex-col w-full absolute top-[140px]'>
             <div className='z-10 w-full h-auto w-3/5 rounded-md my-4 ml-6 flex flex-col pb-6 font-medium max-[800px]:ml-2 max-[800px]:text-center max-[800px]:justify-center max-[800px]:align-center max-[800px]:ml-0'>
                 <div className='flex w-full items-center text-gray-700 pl-7 max-[800px]:text-center max-[800px]:justify-center max-[800px]:align-center max-[800px]:m-0 max-[800px]:pl-0 '>
@@ -125,7 +115,7 @@ const Home = () => {
             {filesName.length?
             <div className='z-10 flex flex-col w-full  pb-4'>
                 <div className='text-start pl-[70px] pt-2 pb-3 max-[800px]:text-3xl font-semibold text-gray-700 text-2xl max-[800px]:text-center max-[800px]:pl-0'>Created Files</div>
-                <div className="flex flex-row gap-4 mx-20 my-2 max-[800px]:justify-center max-[800px]:align-center max-[800px]:text-center max-[800px]:mx-0">
+                <div className="flex flex-row flex-wrap gap-4 ml-[100px] my-2 max-[800px]:justify-center max-[800px]:align-center max-[800px]:text-center max-[800px]:ml-0">
                     {filesName.length ? filesName.map((file) => (
                         <div className='mx-2'><File key={file.userId} name={file.createdBy} description={file.description} year={file.year} topic={file.name}/></div>
                     )) 
@@ -138,11 +128,11 @@ const Home = () => {
             ""}
 
             {uploadFilesName.length?
-            <div className='flex flex-col border-b pb-4'>
-                <div className='text-center pt-2 pb-3'>Uploaded Files</div>
-                <div className="grid grid-cols-4 gap-4 mx-6 my-2">
+            <div className='z-10 flex flex-col  w-full  pb-4 my-4'>
+                <div className='text-start pl-[70px] pt-2 pb-3 max-[800px]:text-3xl font-semibold text-gray-700 text-2xl max-[800px]:text-center max-[800px]:pl-0'>Uploaded Files</div>
+                <div className="flex flex-row flex-wrap gap-4 ml-[100px] my-2 max-[800px]:justify-center max-[800px]:align-center max-[800px]:text-center max-[800px]:ml-0">
                     {uploadFilesName.length ? uploadFilesName.map((upload) => (
-                        <div className='mx-2 border-2'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
+                        <div className='mx-0'><Upload key={upload.userId} name={upload.name} url={upload.url}/></div>
                     )) 
                     :
                     ""}
